@@ -24,10 +24,10 @@ window.CERBERUS_FEATURES = [
   },
   {
     tag: 'RESILIENCE',
-    title: 'Circuit breaker on the backend',
-    mono: 'shared per-Client breaker',
+    title: 'Per-head circuit breakers',
+    mono: 'internal/chclient · per-head registry',
     icon: '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M12 8v4M12 15h.01"/>',
-    body: 'A single per-client breaker guards ClickHouse across all three heads and the /readyz pinger. A failing backend trips once and fast-fails with 503 instead of piling up connections; /readyz flips red so Kubernetes evicts the replica.',
+    body: 'Each head owns its own breaker — a failing or overloaded backend fast-fails 503 on that head alone and never cascades to the other two. A separate probe breaker drives /readyz, so a single-head query storm leaves readiness green, while a true ClickHouse outage still trips it and Kubernetes evicts the replica.',
   },
   {
     tag: 'DEADLINES',
