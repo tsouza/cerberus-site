@@ -26,8 +26,8 @@
   --text-2:        #E7EBF1;  /* strong body / on-dark         */
   --text-muted:    #A2ABB8;  /* lead paragraphs               */
   --text-dim:      #8893A4;  /* card body                     */
-  --text-faint:    #6B7480;  /* captions / meta               */
-  --text-fainter:  #5A6473;  /* code comments / filenames     */
+  --text-faint:    #828B98;  /* captions / meta (AA ≥4.5:1)   */
+  --text-fainter:  #737D8B;  /* code comments / filenames (AA) */
 
   /* ---- Brand + signal accents ----------------------------- */
   --accent:        #7C8CFF;  /* indigo — brand, the "node"    */
