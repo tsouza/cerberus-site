@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cerberus — three query languages, one backend</title>
+  <meta name="description" content="Drop-in Prometheus / Loki / Tempo HTTP gateway for ClickHouse. Keep Grafana, alerting, and your CLI tooling. Swap the backend.">
+
+  <!-- favicons / social -->
+  <link rel="icon" type="image/svg+xml" href="assets/brand/cerberus-mark.svg">
+  <link rel="icon" sizes="32x32" href="assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon-180.png">
+  <meta property="og:title" content="cerberus — three query languages, one backend">
+  <meta property="og:description" content="Drop-in Prometheus / Loki / Tempo HTTP gateway for ClickHouse.">
+  <meta property="og:image" content="assets/brand/og-card-1200x630.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- ======================= NAV ======================= -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="brand">
+        <span class="brand__mark">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <line class="mark__prom"  x1="14.38" y1="8.1" x2="6.62"  y2="22.9"/>
+            <line class="mark__trace" x1="17.62" y1="8.1" x2="25.38" y2="22.9"/>
+            <line class="mark__log"   x1="8.5"  y1="26"  x2="23.5"  y2="26"/>
+            <circle class="mark__node" cx="16" cy="18.6" r="2.9"/>
+          </svg>
+        </span>
+        <span class="brand__name">cerberus</span>
+      </a>
+      <nav class="nav__links">
+        <a class="nav__link" href="#concept">How it works</a>
+        <a class="nav__link" href="#architecture">Architecture</a>
+        <a class="nav__link" href="#features">Engine</a>
+        <a class="nav__link" href="#start">Quick start</a>
+        <a class="btn btn--github" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="glow glow--hero"></div>
+
+    <!-- ======================= HERO ======================= -->
+    <section class="hero section" data-screen-label="Hero">
+      <div class="badge">
+        <span class="badge__dot"></span>
+        <span class="badge__text">v1 · stable wire API · Apache 2.0</span>
+      </div>
+      <h1 class="hero__title">Keep Grafana.<br>Swap the backend.</h1>
+      <p class="hero__lead">
+        A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> HTTP gateway for <strong>ClickHouse</strong>.
+        Point Grafana at cerberus as three datasources — your existing PromQL, LogQL and TraceQL keep working,
+        translated to ClickHouse SQL underneath.
+      </p>
+      <div class="chips">
+        <span class="chip"><span class="chip__tick">▹</span> No Grafana plugin</span>
+        <span class="chip"><span class="chip__tick">▹</span> No custom query language</span>
+        <span class="chip"><span class="chip__tick">▹</span> No reinvented parsers</span>
+      </div>
+      <div class="cta-row">
+        <a href="#start" class="btn btn--primary">Get started <span class="btn__arrow">→</span></a>
+        <button class="cmd-btn" data-copy="git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus &amp;&amp; docker compose up --wait">
+          <span class="cmd-btn__sigil">$</span>
+          <span>docker compose up --wait</span>
+          <span class="cmd-btn__label" data-copy-label>copy</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =================== CONVERGENCE STRIP =================== -->
+    <section class="section section--band">
+      <div class="container strip__inner">
+        <span class="strip__ql strip__ql--prom">PromQL</span>
+        <span class="strip__sep">·</span>
+        <span class="strip__ql strip__ql--log">LogQL</span>
+        <span class="strip__sep">·</span>
+        <span class="strip__ql strip__ql--trace">TraceQL</span>
+        <span class="strip__arrow">→</span>
+        <span class="strip__target">one ClickHouse store</span>
+        <span class="strip__note">Three signals, three query languages, one pipeline.</span>
+      </div>
+    </section>
+
+    <!-- ======================= CONCEPT ======================= -->
+    <section id="concept" class="section section--pad container" data-screen-label="How it works">
+      <span class="section__eyebrow">01 — THE GATEWAY</span>
+      <h2 class="section__title" style="max-width:20ch">One guardian at the gate of three signals</h2>
+      <p class="section__lead" style="max-width:58ch; margin-bottom:56px">
+        Cerberus speaks each upstream HTTP API verbatim, so Grafana sees three ordinary datasources. Your dashboards,
+        alerts and CLI tooling keep using the exact query languages they already use — cerberus does the translation.
+      </p>
+
+      <div class="grid-3">
+        <!-- PromQL / Metrics -->
+        <article class="card">
+          <div class="card__head">
+            <span class="icon-chip icon-chip--sky">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>
+            </span>
+            <span class="card__ql">PromQL</span>
+          </div>
+          <h3 class="card__title">Metrics</h3>
+          <p class="card__body">Counters, gauges and histograms — translated to ClickHouse SQL and held at 574/574 on the CNCF PromQL Compliance Tester.</p>
+        </article>
+        <!-- LogQL / Logs -->
+        <article class="card">
+          <div class="card__head">
+            <span class="icon-chip icon-chip--emerald">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="7" x2="19" y2="7"/><line x1="5" y1="12" x2="15" y2="12"/><line x1="5" y1="17" x2="17" y2="17"/></svg>
+            </span>
+            <span class="card__ql">LogQL</span>
+          </div>
+          <h3 class="card__title">Logs</h3>
+          <p class="card__body">Stream selectors, line filters and metric queries — diffed against a real Loki on Grafana's own bench corpus.</p>
+        </article>
+        <!-- TraceQL / Traces -->
+        <article class="card">
+          <div class="card__head">
+            <span class="icon-chip icon-chip--rose">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="12" r="2.4"/><circle cx="9" cy="18" r="2.4"/><path d="M8 7.5l8 3.2M16.5 13.8L10.5 16.6"/></svg>
+            </span>
+            <span class="card__ql">TraceQL</span>
+          </div>
+          <h3 class="card__title">Traces</h3>
+          <p class="card__body">Span filters and structural queries served through the upstream Tempo HTTP API — the newest of the three heads.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================= WHY ======================= -->
+    <section id="why" class="section section--band">
+      <div class="container section--pad">
+        <span class="section__eyebrow">02 — WHY CERBERUS</span>
+        <h2 class="section__title" style="max-width:24ch">Three stores is a tax you stop paying</h2>
+        <p class="section__lead" style="max-width:62ch; margin-bottom:64px">
+          Metrics, logs and traces rarely share a store — the usual answer is Prometheus + Loki + Tempo: three retention
+          policies and three storage bills for what is largely the same OTLP data sliced three ways. ClickHouse is a great
+          single store for all three signals; cerberus supplies the missing query side.
+        </p>
+        <div class="why-grid">
+          <div class="pillar">
+            <div class="pillar__no">①</div>
+            <h3 class="pillar__title">No Grafana plugin</h3>
+            <p class="pillar__body">Cerberus speaks each upstream HTTP API verbatim — /api/v1/query_range, /loki/api/v1/query_range, /api/search. Grafana sees three normal datasources.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__no">②</div>
+            <h3 class="pillar__title">No custom QL</h3>
+            <p class="pillar__body">PromQL, LogQL, TraceQL — exactly as your dashboards and alerts already use them. Nothing to relearn.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__no">③</div>
+            <h3 class="pillar__title">No reinvented parsers</h3>
+            <p class="pillar__body">Imports prometheus/promql/parser, loki/logql/syntax and tempo/traceql directly. If upstream parses it, cerberus parses it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ARCHITECTURE ======================= -->
+    <section id="architecture" class="section section--band" data-screen-label="Architecture">
+      <div class="container section--pad">
+        <span class="section__eyebrow">03 — ARCHITECTURE</span>
+        <h2 class="section__title" style="max-width:22ch">One query pipeline, not three</h2>
+        <p class="section__lead" style="max-width:60ch; margin-bottom:56px">
+          Each head parses with its reference upstream parser and lowers to a shared plan IR. A rule-based optimiser
+          rewrites it; a closed typed-Frag emitter produces parameterised, escape-free ClickHouse SQL; the engine streams
+          results. The three HTTP heads plug in as thin <span class="mono-accent">Lang</span> adapters — so a new
+          optimisation costs one implementation, not three.
+        </p>
+
+        <div class="arch">
+          <div class="arch__heads">
+            <div class="arch__head"><div class="arch__head-ql arch__head-ql--prom">PromQL</div><div class="arch__head-pkg">prometheus/promql/parser</div></div>
+            <div class="arch__head"><div class="arch__head-ql arch__head-ql--log">LogQL</div><div class="arch__head-pkg">loki/v3/pkg/logql/syntax</div></div>
+            <div class="arch__head"><div class="arch__head-ql arch__head-ql--trace">TraceQL</div><div class="arch__head-pkg">tempo/pkg/traceql</div></div>
+          </div>
+
+          <div class="arch__arrows">
+            <svg width="560" height="34" viewBox="0 0 560 34" fill="none" aria-hidden="true">
+              <path d="M93 2 V14 Q93 18 130 18 L274 18" stroke="#2A323D" stroke-width="1.5" fill="none"/>
+              <path d="M280 2 V32" stroke="#2A323D" stroke-width="1.5"/>
+              <path d="M467 2 V14 Q467 18 430 18 L286 18" stroke="#2A323D" stroke-width="1.5" fill="none"/>
+              <path d="M280 32 l-4 -6 h8 z" fill="#39424E"/>
+            </svg>
+          </div>
+
+          <div class="arch__flow">
+            <div class="flow-box">
+              <div class="flow-box__title">internal/chplan — shared plan IR</div>
+              <div class="flow-box__sub">Scan · Filter · Project · Aggregate · RangeWindow · Limit</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box flow-box--opt">
+              <div class="flow-box__title">internal/optimizer — rule-based, fixpoint</div>
+              <div class="flow-box__sub">predicate pushdown · filter fusion · constant folding</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">
+              <div class="flow-box__title">internal/chsql — typed-Frag SQL emitter</div>
+              <div class="flow-box__sub">parameterised · escape-free · streamed by internal/engine</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-target"><div class="flow-target__label">ClickHouse</div></div>
+          </div>
+        </div>
+
+        <p class="arch__note">
+          The three HTTP heads import their upstream parsers directly and lower into the same IR — so optimiser rules, the
+          SQL builder and the execution engine are written once and shared. Cerberus reads the OpenTelemetry ClickHouse
+          schema shape (column names, types, Map layout), not a specific exporter binary;
+          <span class="mono-dim">CERBERUS_SCHEMA_*</span> overrides handle SigNoz and custom layouts, and
+          <span class="mono-dim">CERBERUS_AUTO_CREATE_SCHEMA</span> bootstraps tables.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================= INSIDE THE ENGINE ======================= -->
+    <section id="features" class="section section--pad container" data-screen-label="Engine">
+      <span class="section__eyebrow">04 — INSIDE THE ENGINE</span>
+      <h2 class="section__title" style="max-width:24ch">A real query engine, not a translator</h2>
+      <p class="section__lead" style="max-width:62ch; margin-bottom:56px">
+        Between the parser and ClickHouse sits an optimiser, a typed SQL builder and an execution engine with the
+        resilience controls you expect from something on the hot path of every dashboard, alert and on-call query.
+      </p>
+
+      <div class="grid-3 grid-3--tight" id="features-grid">
+        <!-- cards injected from js/data.js; static fallbacks below for no-JS -->
+      </div>
+
+      <div class="req-bar">
+        <div class="req-bar__label">REQUIREMENTS</div>
+        <div class="req-bar__item"><span>ClickHouse</span><b>24.8+</b></div>
+        <div class="req-bar__div"></div>
+        <div class="req-bar__item"><span>OTel CH exporter schema</span><b>otel_metrics_* · otel_logs · otel_traces</b></div>
+        <div class="req-bar__div"></div>
+        <div class="req-bar__item"><span>native rate</span><b>25.6+</b></div>
+      </div>
+    </section>
+
+    <!-- ======================= QUICK START ======================= -->
+    <section id="start" class="section section--pad container" data-screen-label="Quick start">
+      <span class="section__eyebrow">05 — QUICK START</span>
+      <h2 class="section__title" style="max-width:20ch">From clone to dashboards in one command</h2>
+      <p class="section__lead" style="max-width:58ch; margin-bottom:36px">
+        The compose stack builds cerberus, boots single-node ClickHouse, loads a deterministic OTel fixture, and brings up
+        Grafana pre-provisioned with cerberus as three datasources. A fresh dashboard populates in ~30s.
+      </p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true"  data-tab="compose">Docker Compose</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="release">From a release</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="helm">Helm</button>
+      </div>
+
+      <div class="code" data-panel="compose">
+        <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__file">shell — docker compose</span></div>
+        <pre class="code__body"><code><span class="c-comment"># clone, build, and boot the full demo stack</span>
+git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus
+docker compose up --wait
+
+<span class="c-comment"># Grafana auto-login on :3000 · cerberus on :8080</span>
+open http://localhost:3000</code></pre>
+      </div>
+
+      <div class="code" data-panel="release" hidden>
+        <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__file">shell — published release</span></div>
+        <pre class="code__body"><code><span class="c-comment"># one stateless binary — pin an explicit tag</span>
+docker pull ghcr.io/tsouza/cerberus:1.5.0
+
+docker run --rm -p 8080:8080 \
+  -e <span class="c-var">CERBERUS_CH_ADDR</span>=clickhouse:9000 \
+  ghcr.io/tsouza/cerberus:1.5.0</code></pre>
+      </div>
+
+      <div class="code" data-panel="helm" hidden>
+        <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__file">shell — helm / kubernetes</span></div>
+        <pre class="code__body"><code><span class="c-comment"># signed OCI chart — cosign + SLSA provenance</span>
+helm install cerberus \
+  oci://ghcr.io/tsouza/cerberus/charts/cerberus --version &lt;x.y.z&gt; \
+  --set <span class="c-var">clickhouse.addr</span>='{clickhouse:9000}' \
+  --set <span class="c-var">clickhouse.existingSecret</span>=ch-creds</code></pre>
+      </div>
+
+      <div class="doclinks">
+        <a class="doclink" href="https://github.com/tsouza/cerberus/blob/main/docs/configuration.md" target="_blank" rel="noopener">Configuration reference →</a>
+        <a class="doclink" href="https://github.com/tsouza/cerberus/blob/main/docs/operations.md" target="_blank" rel="noopener">Operations guide →</a>
+        <a class="doclink" href="https://github.com/tsouza/cerberus/releases" target="_blank" rel="noopener">Releases →</a>
+      </div>
+    </section>
+
+    <!-- ======================= CORRECTNESS ======================= -->
+    <section class="section section--band-top" data-screen-label="Correctness">
+      <div class="container" style="padding-block:96px">
+        <span class="section__eyebrow">06 — CORRECTNESS</span>
+        <h2 class="section__title" style="max-width:24ch">Held to reference, case for case</h2>
+        <p class="section__lead" style="max-width:62ch; margin-bottom:40px">
+          Every head is diffed against its real upstream engine on shared, seeded data — pinning observed semantics on
+          ClickHouse against an oracle, not just emitted SQL. No allow-lists.
+        </p>
+
+        <div class="grid-3 grid-3--tight" style="margin-bottom:36px">
+          <article class="head-card">
+            <div class="head-card__head">
+              <span class="head-card__dot head-card__dot--prom"></span>
+              <span class="head-card__name head-card__name--prom">PromQL</span>
+              <span class="head-card__vs">vs real Prometheus</span>
+            </div>
+            <p class="head-card__body">Run through the third-party CNCF / PromLabs Compliance Tester against a real prom/prometheus seeded with identical data — the same suite the CNCF Prometheus Conformance Program uses. No allow-list.</p>
+            <div class="head-card__method">CNCF / PromLabs Compliance Tester</div>
+          </article>
+          <article class="head-card">
+            <div class="head-card__head">
+              <span class="head-card__dot head-card__dot--log"></span>
+              <span class="head-card__name head-card__name--log">LogQL</span>
+              <span class="head-card__vs">vs real Loki</span>
+            </div>
+            <p class="head-card__body">Diffed query-for-query against a real Loki on Grafana's own pkg/logql/bench corpus — responses compared on ClickHouse against the upstream engine, not just the emitted SQL.</p>
+            <div class="head-card__method">differential harness · logql/bench corpus</div>
+          </article>
+          <article class="head-card">
+            <div class="head-card__head">
+              <span class="head-card__dot head-card__dot--trace"></span>
+              <span class="head-card__name head-card__name--trace">TraceQL</span>
+              <span class="head-card__vs">vs real Tempo</span>
+            </div>
+            <p class="head-card__body">Served through the upstream Tempo HTTP API and diffed against a real Tempo on a maintained TXTAR query corpus — the newest head, validated the same case-for-case way.</p>
+            <div class="head-card__method">differential harness · TXTAR corpus</div>
+          </article>
+        </div>
+
+        <div class="layer-chips" id="layer-chips">
+          <!-- chips injected from js/data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CTA ======================= -->
+    <section class="cta section">
+      <div class="cta-card">
+        <div class="glow glow--cta"></div>
+        <span class="cta-card__mark">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <line class="mark__prom"  x1="14.38" y1="8.1" x2="6.62"  y2="22.9"/>
+            <line class="mark__trace" x1="17.62" y1="8.1" x2="25.38" y2="22.9"/>
+            <line class="mark__log"   x1="8.5"  y1="26"  x2="23.5"  y2="26"/>
+            <circle class="mark__node" cx="16" cy="18.6" r="2.9"/>
+          </svg>
+        </span>
+        <h2 class="cta-card__title">Swap the backend, not the workflow</h2>
+        <p class="cta-card__lead">Open source under Apache 2.0. Point Grafana at cerberus and your PromQL, LogQL and TraceQL just work.</p>
+        <div class="cta-card__actions">
+          <a class="btn btn--primary" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="btn btn--ghost" href="#start">Quick start</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__mark">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <line class="mark__prom"  x1="14.38" y1="8.1" x2="6.62"  y2="22.9"/>
+            <line class="mark__trace" x1="17.62" y1="8.1" x2="25.38" y2="22.9"/>
+            <line class="mark__log"   x1="8.5"  y1="26"  x2="23.5"  y2="26"/>
+            <circle class="mark__node" cx="16" cy="18.6" r="2.9"/>
+          </svg>
+        </span>
+        <span class="footer__name">cerberus</span>
+        <span class="footer__meta">Apache-2.0 © Thiago Souza</span>
+      </div>
+      <nav class="footer__links">
+        <a class="footer__link" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">GitHub</a>
+        <a class="footer__link" href="https://github.com/tsouza/cerberus/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+        <a class="footer__link" href="https://github.com/tsouza/cerberus/tree/main/docs" target="_blank" rel="noopener">Docs</a>
+        <a class="footer__link" href="https://pkg.go.dev/github.com/tsouza/cerberus" target="_blank" rel="noopener">Go reference</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

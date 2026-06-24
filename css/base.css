@@ -1,0 +1,89 @@
+/* ============================================================
+   cerberus — base / reset / layout primitives
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-2);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; }
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent); color: var(--bg); }
+
+h1, h2, h3, p { margin: 0; }
+
+/* ---- Layout container ------------------------------------- */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- Section rhythm --------------------------------------- */
+.section { position: relative; z-index: 1; }
+.section--pad   { padding-block: var(--section-y); }
+.section--band  { background: var(--bg-elevated); border-block: 1px solid var(--border); }
+.section--band-top { background: var(--bg-elevated); border-top: 1px solid var(--border); }
+
+.section__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  color: var(--accent);
+}
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-h2);
+  color: var(--text);
+  margin-top: 14px;
+}
+.section__lead {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-top: 18px;
+}
+
+/* ---- The brand mark (3 strokes → 1 node) ------------------ */
+.mark { width: 100%; height: 100%; overflow: visible; display: block; }
+.mark line { stroke-width: 3.1; stroke-linecap: round; }
+.mark__prom  { stroke: var(--sky); }
+.mark__log   { stroke: var(--emerald); }
+.mark__trace { stroke: var(--rose); }
+.mark__node  { fill: var(--accent); }
+
+/* ---- Glow accents (decorative radial light) --------------- */
+.glow { position: absolute; pointer-events: none; background: var(--glow); z-index: 0; }
+.glow--hero { top: -120px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; }
+.glow--cta  { bottom: -160px; left: 50%; transform: translateX(-50%); width: 600px; height: 340px; }
+
+/* ---- Generic 3-column grid -------------------------------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-3--tight { gap: 16px; }
+
+/* ---- Responsive ------------------------------------------- */
+@media (max-width: 900px) {
+  :root { --section-y: 76px; }
+  .grid-3, .grid-3--tight { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .nav__links a:not(.btn) { display: none; }
+}
