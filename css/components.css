@@ -72,12 +72,19 @@
 .hp-logs  { fill: none; stroke-width: 3; stroke-linecap: round; }
 .hp-bars  { fill: none; stroke-width: 6; stroke-linecap: round; }
 .hp-label { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; }
-.hp-tab--prom,  .hp-dot--prom,  .hp-label--prom  { fill: var(--sky); }
-.hp-tab--log,   .hp-dot--log,   .hp-label--log   { fill: var(--emerald); }
-.hp-tab--trace, .hp-dot--trace, .hp-label--trace { fill: var(--rose); }
+.hp-dot--prom,  .hp-label--prom  { fill: var(--sky); }
+.hp-dot--log,   .hp-label--log   { fill: var(--emerald); }
+.hp-dot--trace, .hp-label--trace { fill: var(--rose); }
 .hp-line--prom  { stroke: var(--sky); }
 .hp-line--log   { stroke: var(--emerald); }
 .hp-line--trace { stroke: var(--rose); }
+/* backend layer */
+.hp-conn { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; stroke-linecap: round; }
+.hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
+.hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
+.hp-kw  { fill: var(--accent-soft); }
+.hp-cyl     { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
+.hp-cyl-top { fill: var(--surface);     stroke: var(--accent-ring); stroke-width: 1.5; }
 .badge {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 6px 13px; border: 1px solid var(--border-3); background: #12161C;

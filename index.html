@@ -92,29 +92,38 @@
         </div>
       </div>
 
-      <!-- three telemetry panels (metrics / logs / traces) — one ClickHouse backend -->
+      <!-- three query languages in a row, all backed by one ClickHouse (SQL) layer -->
       <div class="hero__viz" aria-hidden="true">
-        <svg viewBox="0 0 400 340" fill="none">
+        <svg viewBox="0 0 400 236" fill="none">
           <!-- PromQL — metrics -->
-          <rect class="hp-card" x="8" y="8" width="384" height="96" rx="18"/>
-          <rect class="hp-tab--prom" x="20" y="30" width="5" height="52" rx="2.5"/>
-          <circle class="hp-dot--prom" cx="40" cy="34" r="4"/>
-          <text class="hp-label hp-label--prom" x="54" y="38">PromQL</text>
-          <polyline class="hp-spark hp-line--prom" points="38,82 70,68 96,88 124,58 156,76 188,54 220,84 252,64 286,74 320,56 362,72"/>
+          <rect class="hp-card" x="8" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--prom" cx="26" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--prom" x="38" y="34">PromQL</text>
+          <polyline class="hp-spark hp-line--prom" points="24,84 38,70 52,88 66,58 80,80 94,62 108,76"/>
 
           <!-- LogQL — logs -->
-          <rect class="hp-card" x="8" y="120" width="384" height="96" rx="18"/>
-          <rect class="hp-tab--log" x="20" y="142" width="5" height="52" rx="2.5"/>
-          <circle class="hp-dot--log" cx="40" cy="146" r="4"/>
-          <text class="hp-label hp-label--log" x="54" y="150">LogQL</text>
-          <path class="hp-logs hp-line--log" d="M38 178 H 238 M38 190 H 188 M38 202 H 262"/>
+          <rect class="hp-card" x="140" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--log" cx="158" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--log" x="170" y="34">LogQL</text>
+          <path class="hp-logs hp-line--log" d="M156 64 H236 M156 76 H212 M156 88 H244"/>
 
           <!-- TraceQL — traces -->
-          <rect class="hp-card" x="8" y="232" width="384" height="96" rx="18"/>
-          <rect class="hp-tab--trace" x="20" y="254" width="5" height="52" rx="2.5"/>
-          <circle class="hp-dot--trace" cx="40" cy="258" r="4"/>
-          <text class="hp-label hp-label--trace" x="54" y="262">TraceQL</text>
-          <path class="hp-bars hp-line--trace" d="M38 290 H 198 M70 302 H 200 M104 314 H 286"/>
+          <rect class="hp-card" x="272" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--trace" cx="290" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--trace" x="302" y="34">TraceQL</text>
+          <path class="hp-bars hp-line--trace" d="M288 64 H360 M300 76 H372 M312 88 H356"/>
+
+          <!-- connectors into the backend layer -->
+          <path class="hp-conn" d="M68 104 V132 M200 104 V132 M332 104 V132"/>
+
+          <!-- ClickHouse — one backend, SQL -->
+          <rect class="hp-card" x="8" y="132" width="384" height="92" rx="16"/>
+          <circle class="hp-dot--ch" cx="26" cy="156" r="4"/>
+          <text class="hp-label hp-label--ch" x="38" y="160">ClickHouse</text>
+          <text class="hp-sql" x="38" y="188"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
+          <text class="hp-sql" x="38" y="206"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
+          <ellipse class="hp-cyl-top" cx="348" cy="160" rx="18" ry="5"/>
+          <path class="hp-cyl" d="M330 160 V196 A18 5 0 0 0 366 196 V160"/>
         </svg>
       </div>
     </section>
