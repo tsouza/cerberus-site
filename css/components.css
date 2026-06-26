@@ -65,21 +65,25 @@
 }
 .hero__copy { min-width: 0; }
 
-/* hero signal graphic: 3 query-language traces → 1 node → ClickHouse */
+/* hero graphic: 1 ClickHouse backend → gateway → 3 query languages (knee lines) */
 .hero__viz svg { width: 100%; height: auto; display: block; overflow: visible; }
-.hero__viz .hv { fill: none; stroke-width: 2.4; stroke-linecap: round; }
-.hv--prom  { stroke: var(--sky); }
-.hv--log   { stroke: var(--emerald); stroke-width: 2.8; stroke-dasharray: 0.1 8; }
-.hv--trace { stroke: var(--rose); }
-.hv-dot--prom  { fill: var(--sky); }
-.hv-dot--log   { fill: var(--emerald); }
-.hv-dot--trace { fill: var(--rose); }
-.hv-glow  { fill: var(--accent-fill-2); }
-.hv-ring  { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; }
-.hv-node  { fill: var(--accent); }
-.hv-out   { stroke: var(--accent); stroke-width: 2; }
-.hv-store { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
-.hv-col   { stroke: var(--accent-ring); stroke-width: 2; stroke-linecap: round; }
+.hero__viz .hv--prom, .hero__viz .hv--log, .hero__viz .hv--trace,
+.hero__viz .hv-bus, .hero__viz .hv-link, .hero__viz .hv-ring {
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+}
+.hv--prom  { stroke: var(--sky);     stroke-width: 2.4; }
+.hv--log   { stroke: var(--emerald); stroke-width: 2.4; }
+.hv--trace { stroke: var(--rose);    stroke-width: 2.4; }
+.hv-bus    { stroke: var(--accent);  stroke-width: 2.4; }
+.hv-link   { stroke: var(--accent);  stroke-width: 2; }
+.hv-ring   { stroke: var(--accent-ring); stroke-width: 1.5; }
+.hv-glow   { fill: var(--accent-fill-2); }
+.hv-node   { fill: var(--accent); }
+.hv-cyl    { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
+.hv-cyl-top{ fill: var(--surface);     stroke: var(--accent-ring); stroke-width: 1.5; }
+.hv-arrow--prom,  .hv-tap--prom  { fill: var(--sky); }
+.hv-arrow--log,   .hv-tap--log   { fill: var(--emerald); }
+.hv-arrow--trace, .hv-tap--trace { fill: var(--rose); }
 .badge {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 6px 13px; border: 1px solid var(--border-3); background: #12161C;

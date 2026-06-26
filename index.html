@@ -92,28 +92,37 @@
         </div>
       </div>
 
-      <!-- three query-language signals → one gateway node → ClickHouse -->
+      <!-- one ClickHouse backend → gateway → three query languages (data flows out, right→left) -->
       <div class="hero__viz" aria-hidden="true">
         <svg viewBox="0 0 440 360" fill="none">
-          <!-- soft halo behind the node -->
-          <circle class="hv-glow" cx="300" cy="180" r="40"/>
-          <!-- signal traces converging on the node -->
-          <path class="hv hv--prom"  d="M4 70 C 150 70 156 180 286 178"/>
-          <path class="hv hv--log"   d="M4 180 L 286 180"/>
-          <path class="hv hv--trace" d="M4 290 C 150 290 156 180 286 182"/>
-          <!-- entry markers -->
-          <circle class="hv-dot--prom"  cx="4" cy="70"  r="3.4"/>
-          <circle class="hv-dot--log"   cx="4" cy="180" r="3.4"/>
-          <circle class="hv-dot--trace" cx="4" cy="290" r="3.4"/>
-          <!-- the gateway node -->
+          <!-- ClickHouse: the single backend, right -->
+          <path class="hv-cyl" d="M378 155 V205 A22 6.5 0 0 0 422 205 V155"/>
+          <ellipse class="hv-cyl-top" cx="400" cy="155" rx="22" ry="6.5"/>
+          <path class="hv-link" d="M309 180 H 378"/>
+
+          <!-- gateway node -->
+          <circle class="hv-glow" cx="300" cy="180" r="38"/>
           <circle class="hv-ring" cx="300" cy="180" r="19"/>
           <circle class="hv-node" cx="300" cy="180" r="8"/>
-          <!-- one line out to the store -->
-          <path class="hv-out" d="M319 180 L 372 180"/>
-          <rect class="hv-store" x="372" y="150" width="60" height="60" rx="11"/>
-          <line class="hv-col" x1="385" y1="167" x2="419" y2="167"/>
-          <line class="hv-col" x1="385" y1="180" x2="419" y2="180"/>
-          <line class="hv-col" x1="385" y1="193" x2="419" y2="193"/>
+
+          <!-- node → distribution bus -->
+          <path class="hv-link" d="M291 180 H 232"/>
+          <path class="hv-bus"  d="M232 70 V 290"/>
+
+          <!-- three knee lines out to the query heads -->
+          <path class="hv--prom"  d="M232 70  H 26"/>
+          <path class="hv--log"   d="M232 180 H 26"/>
+          <path class="hv--trace" d="M232 290 H 26"/>
+
+          <!-- bus taps -->
+          <circle class="hv-tap--prom"  cx="232" cy="70"  r="3"/>
+          <circle class="hv-tap--log"   cx="232" cy="180" r="3"/>
+          <circle class="hv-tap--trace" cx="232" cy="290" r="3"/>
+
+          <!-- arrowheads: data flowing out to PromQL / LogQL / TraceQL -->
+          <polygon class="hv-arrow--prom"  points="14,70  26,64.5  26,75.5"/>
+          <polygon class="hv-arrow--log"   points="14,180 26,174.5 26,185.5"/>
+          <polygon class="hv-arrow--trace" points="14,290 26,284.5 26,295.5"/>
         </svg>
       </div>
     </section>
