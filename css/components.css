@@ -158,7 +158,7 @@
 .flow-box__sub { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-faint); margin-top: 5px; }
 .flow-box--opt .flow-box__sub { color: #7B83B8; }
 .flow-arrow { color: #39424E; font-family: var(--font-mono); }
-.flow-target { background: var(--accent); color: var(--bg); border-radius: var(--r-md); padding: 16px 34px; text-align: center; box-shadow: var(--shadow-accent-strong); }
+.flow-target { background: var(--accent-fill-2); color: var(--accent-soft); border: 1px solid var(--accent-ring); border-radius: var(--r-md); padding: 16px 34px; text-align: center; }
 .flow-target__label { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: .01em; }
 .arch__note { font-size: var(--fs-xs); line-height: 1.55; color: var(--text-faint); max-width: 66ch; margin-top: 24px; }
 
