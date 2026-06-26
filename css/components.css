@@ -99,6 +99,7 @@
   font-size: var(--fs-hero); line-height: 1.02; letter-spacing: var(--tracking-tight);
   color: var(--text); max-width: 14ch; margin-bottom: 26px;
 }
+.hero__title-keep { color: var(--text-muted); }
 .hero__lead {
   font-size: var(--fs-lead); line-height: 1.5; color: var(--text-muted);
   max-width: 56ch; margin-bottom: 36px;
