@@ -92,37 +92,29 @@
         </div>
       </div>
 
-      <!-- one ClickHouse backend → gateway → three query languages (data flows out, right→left) -->
+      <!-- three telemetry panels (metrics / logs / traces) — one ClickHouse backend -->
       <div class="hero__viz" aria-hidden="true">
-        <svg viewBox="0 0 440 360" fill="none">
-          <!-- ClickHouse: the single backend, right -->
-          <path class="hv-cyl" d="M378 155 V205 A22 6.5 0 0 0 422 205 V155"/>
-          <ellipse class="hv-cyl-top" cx="400" cy="155" rx="22" ry="6.5"/>
-          <path class="hv-link" d="M309 180 H 378"/>
+        <svg viewBox="0 0 400 340" fill="none">
+          <!-- PromQL — metrics -->
+          <rect class="hp-card" x="8" y="8" width="384" height="96" rx="18"/>
+          <rect class="hp-tab--prom" x="20" y="30" width="5" height="52" rx="2.5"/>
+          <circle class="hp-dot--prom" cx="40" cy="34" r="4"/>
+          <text class="hp-label hp-label--prom" x="54" y="38">PromQL</text>
+          <polyline class="hp-spark hp-line--prom" points="38,82 70,68 96,88 124,58 156,76 188,54 220,84 252,64 286,74 320,56 362,72"/>
 
-          <!-- gateway node -->
-          <circle class="hv-glow" cx="300" cy="180" r="38"/>
-          <circle class="hv-ring" cx="300" cy="180" r="19"/>
-          <circle class="hv-node" cx="300" cy="180" r="8"/>
+          <!-- LogQL — logs -->
+          <rect class="hp-card" x="8" y="120" width="384" height="96" rx="18"/>
+          <rect class="hp-tab--log" x="20" y="142" width="5" height="52" rx="2.5"/>
+          <circle class="hp-dot--log" cx="40" cy="146" r="4"/>
+          <text class="hp-label hp-label--log" x="54" y="150">LogQL</text>
+          <path class="hp-logs hp-line--log" d="M38 178 H 238 M38 190 H 188 M38 202 H 262"/>
 
-          <!-- node → distribution bus -->
-          <path class="hv-link" d="M291 180 H 232"/>
-          <path class="hv-bus"  d="M232 70 V 290"/>
-
-          <!-- three knee lines out to the query heads -->
-          <path class="hv--prom"  d="M232 70  H 26"/>
-          <path class="hv--log"   d="M232 180 H 26"/>
-          <path class="hv--trace" d="M232 290 H 26"/>
-
-          <!-- bus taps -->
-          <circle class="hv-tap--prom"  cx="232" cy="70"  r="3"/>
-          <circle class="hv-tap--log"   cx="232" cy="180" r="3"/>
-          <circle class="hv-tap--trace" cx="232" cy="290" r="3"/>
-
-          <!-- arrowheads: data flowing out to PromQL / LogQL / TraceQL -->
-          <polygon class="hv-arrow--prom"  points="14,70  26,64.5  26,75.5"/>
-          <polygon class="hv-arrow--log"   points="14,180 26,174.5 26,185.5"/>
-          <polygon class="hv-arrow--trace" points="14,290 26,284.5 26,295.5"/>
+          <!-- TraceQL — traces -->
+          <rect class="hp-card" x="8" y="232" width="384" height="96" rx="18"/>
+          <rect class="hp-tab--trace" x="20" y="254" width="5" height="52" rx="2.5"/>
+          <circle class="hp-dot--trace" cx="40" cy="258" r="4"/>
+          <text class="hp-label hp-label--trace" x="54" y="262">TraceQL</text>
+          <path class="hp-bars hp-line--trace" d="M38 290 H 198 M70 302 H 200 M104 314 H 286"/>
         </svg>
       </div>
     </section>

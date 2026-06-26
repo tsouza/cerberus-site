@@ -65,25 +65,19 @@
 }
 .hero__copy { min-width: 0; }
 
-/* hero graphic: 1 ClickHouse backend → gateway → 3 query languages (knee lines) */
+/* hero graphic: three telemetry panels (metrics / logs / traces) */
 .hero__viz svg { width: 100%; height: auto; display: block; overflow: visible; }
-.hero__viz .hv--prom, .hero__viz .hv--log, .hero__viz .hv--trace,
-.hero__viz .hv-bus, .hero__viz .hv-link, .hero__viz .hv-ring {
-  fill: none; stroke-linecap: round; stroke-linejoin: round;
-}
-.hv--prom  { stroke: var(--sky);     stroke-width: 2.4; }
-.hv--log   { stroke: var(--emerald); stroke-width: 2.4; }
-.hv--trace { stroke: var(--rose);    stroke-width: 2.4; }
-.hv-bus    { stroke: var(--accent);  stroke-width: 2.4; }
-.hv-link   { stroke: var(--accent);  stroke-width: 2; }
-.hv-ring   { stroke: var(--accent-ring); stroke-width: 1.5; }
-.hv-glow   { fill: var(--accent-fill-2); }
-.hv-node   { fill: var(--accent); }
-.hv-cyl    { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
-.hv-cyl-top{ fill: var(--surface);     stroke: var(--accent-ring); stroke-width: 1.5; }
-.hv-arrow--prom,  .hv-tap--prom  { fill: var(--sky); }
-.hv-arrow--log,   .hv-tap--log   { fill: var(--emerald); }
-.hv-arrow--trace, .hv-tap--trace { fill: var(--rose); }
+.hp-card { fill: var(--surface); stroke: var(--border-card); stroke-width: 1; }
+.hp-spark { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hp-logs  { fill: none; stroke-width: 3; stroke-linecap: round; }
+.hp-bars  { fill: none; stroke-width: 6; stroke-linecap: round; }
+.hp-label { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; }
+.hp-tab--prom,  .hp-dot--prom,  .hp-label--prom  { fill: var(--sky); }
+.hp-tab--log,   .hp-dot--log,   .hp-label--log   { fill: var(--emerald); }
+.hp-tab--trace, .hp-dot--trace, .hp-label--trace { fill: var(--rose); }
+.hp-line--prom  { stroke: var(--sky); }
+.hp-line--log   { stroke: var(--emerald); }
+.hp-line--trace { stroke: var(--rose); }
 .badge {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 6px 13px; border: 1px solid var(--border-3); background: #12161C;
