@@ -66,28 +66,55 @@
 
     <!-- ======================= HERO ======================= -->
     <section class="hero section" data-screen-label="Hero">
-      <div class="badge">
-        <span class="badge__dot"></span>
-        <span class="badge__text">v1 · stable wire API · Apache 2.0</span>
+      <div class="hero__copy">
+        <div class="badge">
+          <span class="badge__dot"></span>
+          <span class="badge__text">v1 · stable wire API · Apache 2.0</span>
+        </div>
+        <h1 class="hero__title">Keep Grafana.<br>Swap the backend.</h1>
+        <p class="hero__lead">
+          A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> HTTP gateway for <strong>ClickHouse</strong>.
+          Point Grafana at cerberus as three datasources — your existing PromQL, LogQL and TraceQL keep working,
+          translated to ClickHouse SQL underneath.
+        </p>
+        <div class="chips">
+          <span class="chip"><span class="chip__tick">▹</span> No Grafana plugin</span>
+          <span class="chip"><span class="chip__tick">▹</span> No custom query language</span>
+          <span class="chip"><span class="chip__tick">▹</span> No reinvented parsers</span>
+        </div>
+        <div class="cta-row">
+          <a href="#start" class="btn btn--primary">Get started <span class="btn__arrow">→</span></a>
+          <button class="cmd-btn" data-copy="git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus &amp;&amp; docker compose up --wait">
+            <span class="cmd-btn__sigil">$</span>
+            <span>docker compose up --wait</span>
+            <span class="cmd-btn__label" data-copy-label>copy</span>
+          </button>
+        </div>
       </div>
-      <h1 class="hero__title">Keep Grafana.<br>Swap the backend.</h1>
-      <p class="hero__lead">
-        A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> HTTP gateway for <strong>ClickHouse</strong>.
-        Point Grafana at cerberus as three datasources — your existing PromQL, LogQL and TraceQL keep working,
-        translated to ClickHouse SQL underneath.
-      </p>
-      <div class="chips">
-        <span class="chip"><span class="chip__tick">▹</span> No Grafana plugin</span>
-        <span class="chip"><span class="chip__tick">▹</span> No custom query language</span>
-        <span class="chip"><span class="chip__tick">▹</span> No reinvented parsers</span>
-      </div>
-      <div class="cta-row">
-        <a href="#start" class="btn btn--primary">Get started <span class="btn__arrow">→</span></a>
-        <button class="cmd-btn" data-copy="git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus &amp;&amp; docker compose up --wait">
-          <span class="cmd-btn__sigil">$</span>
-          <span>docker compose up --wait</span>
-          <span class="cmd-btn__label" data-copy-label>copy</span>
-        </button>
+
+      <!-- three query-language signals → one gateway node → ClickHouse -->
+      <div class="hero__viz" aria-hidden="true">
+        <svg viewBox="0 0 440 360" fill="none">
+          <!-- soft halo behind the node -->
+          <circle class="hv-glow" cx="300" cy="180" r="40"/>
+          <!-- signal traces converging on the node -->
+          <path class="hv hv--prom"  d="M4 70 C 150 70 156 180 286 178"/>
+          <path class="hv hv--log"   d="M4 180 L 286 180"/>
+          <path class="hv hv--trace" d="M4 290 C 150 290 156 180 286 182"/>
+          <!-- entry markers -->
+          <circle class="hv-dot--prom"  cx="4" cy="70"  r="3.4"/>
+          <circle class="hv-dot--log"   cx="4" cy="180" r="3.4"/>
+          <circle class="hv-dot--trace" cx="4" cy="290" r="3.4"/>
+          <!-- the gateway node -->
+          <circle class="hv-ring" cx="300" cy="180" r="19"/>
+          <circle class="hv-node" cx="300" cy="180" r="8"/>
+          <!-- one line out to the store -->
+          <path class="hv-out" d="M319 180 L 372 180"/>
+          <rect class="hv-store" x="372" y="150" width="60" height="60" rx="11"/>
+          <line class="hv-col" x1="385" y1="167" x2="419" y2="167"/>
+          <line class="hv-col" x1="385" y1="180" x2="419" y2="180"/>
+          <line class="hv-col" x1="385" y1="193" x2="419" y2="193"/>
+        </svg>
       </div>
     </section>
 
