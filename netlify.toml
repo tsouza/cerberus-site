@@ -1,0 +1,13 @@
+# Static site — no build step. Netlify serves the repo root as-is.
+[build]
+  publish = "."
+  command = ""
+
+# Sensible defaults for a static marketing site. No CSP here — it would
+# need to allowlist Google Fonts; add one later if we tighten things.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
