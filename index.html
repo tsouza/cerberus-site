@@ -66,42 +66,51 @@
 
     <!-- ======================= HERO ======================= -->
     <section class="hero section" data-screen-label="Hero">
-      <div class="badge">
-        <span class="badge__dot"></span>
-        <span class="badge__text">v1 · stable wire API · Apache 2.0</span>
+      <div class="hero__copy">
+        <h1 class="hero__title"><span class="hero__title-keep">Keep Grafana.</span><br>Swap the backend.</h1>
+        <p class="hero__lead">
+          A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> gateway for <strong>ClickHouse</strong> —
+          your PromQL, LogQL and TraceQL keep working, translated to SQL underneath.
+        </p>
+        <div class="cta-row">
+          <a href="#start" class="btn btn--primary">Get started <span class="btn__arrow">→</span></a>
+          <a href="#architecture" class="btn btn--ghost">How it works</a>
+        </div>
       </div>
-      <h1 class="hero__title">Keep Grafana.<br>Swap the backend.</h1>
-      <p class="hero__lead">
-        A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> HTTP gateway for <strong>ClickHouse</strong>.
-        Point Grafana at cerberus as three datasources — your existing PromQL, LogQL and TraceQL keep working,
-        translated to ClickHouse SQL underneath.
-      </p>
-      <div class="chips">
-        <span class="chip"><span class="chip__tick">▹</span> No Grafana plugin</span>
-        <span class="chip"><span class="chip__tick">▹</span> No custom query language</span>
-        <span class="chip"><span class="chip__tick">▹</span> No reinvented parsers</span>
-      </div>
-      <div class="cta-row">
-        <a href="#start" class="btn btn--primary">Get started <span class="btn__arrow">→</span></a>
-        <button class="cmd-btn" data-copy="git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus &amp;&amp; docker compose up --wait">
-          <span class="cmd-btn__sigil">$</span>
-          <span>docker compose up --wait</span>
-          <span class="cmd-btn__label" data-copy-label>copy</span>
-        </button>
-      </div>
-    </section>
 
-    <!-- =================== CONVERGENCE STRIP =================== -->
-    <section class="section section--band">
-      <div class="container strip__inner">
-        <span class="strip__ql strip__ql--prom">PromQL</span>
-        <span class="strip__sep">·</span>
-        <span class="strip__ql strip__ql--log">LogQL</span>
-        <span class="strip__sep">·</span>
-        <span class="strip__ql strip__ql--trace">TraceQL</span>
-        <span class="strip__arrow">→</span>
-        <span class="strip__target">one ClickHouse store</span>
-        <span class="strip__note">Three signals, three query languages, one pipeline.</span>
+      <!-- three query languages in a row, all backed by one ClickHouse (SQL) layer -->
+      <div class="hero__viz" aria-hidden="true">
+        <svg viewBox="0 0 400 236" fill="none">
+          <!-- PromQL — metrics -->
+          <rect class="hp-card" x="8" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--prom" cx="26" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--prom" x="38" y="34">PromQL</text>
+          <polyline class="hp-spark hp-line--prom" points="24,84 38,70 52,88 66,58 80,80 94,62 108,76"/>
+
+          <!-- LogQL — logs -->
+          <rect class="hp-card" x="140" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--log" cx="158" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--log" x="170" y="34">LogQL</text>
+          <path class="hp-logs hp-line--log" d="M156 64 H236 M156 76 H212 M156 88 H244"/>
+
+          <!-- TraceQL — traces -->
+          <rect class="hp-card" x="272" y="8" width="120" height="96" rx="16"/>
+          <circle class="hp-dot--trace" cx="290" cy="30" r="3.5"/>
+          <text class="hp-label hp-label--trace" x="302" y="34">TraceQL</text>
+          <path class="hp-bars hp-line--trace" d="M288 64 H360 M300 76 H372 M312 88 H356"/>
+
+          <!-- connectors into the backend layer -->
+          <path class="hp-conn" d="M68 104 V132 M200 104 V132 M332 104 V132"/>
+
+          <!-- ClickHouse — one backend, SQL -->
+          <rect class="hp-card" x="8" y="132" width="384" height="92" rx="16"/>
+          <circle class="hp-dot--ch" cx="26" cy="156" r="4"/>
+          <text class="hp-label hp-label--ch" x="38" y="160">ClickHouse</text>
+          <text class="hp-sql" x="38" y="188"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
+          <text class="hp-sql" x="38" y="206"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
+          <ellipse class="hp-cyl-top" cx="348" cy="160" rx="18" ry="5"/>
+          <path class="hp-cyl" d="M330 160 V196 A18 5 0 0 0 366 196 V160"/>
+        </svg>
       </div>
     </section>
 

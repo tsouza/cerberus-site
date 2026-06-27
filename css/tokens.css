@@ -59,7 +59,7 @@
   --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
   /* fluid type scale (clamp: min, preferred, max) */
-  --fs-hero:    clamp(40px, 6.4vw, 82px);
+  --fs-hero:    clamp(38px, 6.0vw, 74px);
   --fs-h2:      clamp(28px, 3.6vw, 44px);
   --fs-h2-cta:  clamp(28px, 4vw,   46px);
   --fs-lead:    clamp(17px, 2vw,   21px);
