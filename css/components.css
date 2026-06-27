@@ -43,19 +43,6 @@
 .btn--github:hover { border-color: #3a4452; }
 .btn__arrow { font-family: var(--font-mono); }
 
-/* command-copy button (hero) */
-.cmd-btn {
-  display: inline-flex; align-items: center; gap: 11px; cursor: pointer;
-  background: #12161C; border: 1px solid var(--border-3); color: var(--text-2);
-  font-family: var(--font-mono); font-size: var(--fs-mono-sm);
-  padding: 13px 17px; border-radius: 9px;
-}
-.cmd-btn:hover { border-color: #3a4452; }
-.cmd-btn__sigil { color: var(--accent); }
-.cmd-btn__label {
-  color: var(--text-faint); font-family: var(--font-body); font-size: 12px; font-weight: 600;
-  padding-left: 4px; border-left: 1px solid var(--border-3);
-}
 
 /* ---- Hero ------------------------------------------------- */
 .hero {
@@ -85,15 +72,6 @@
 .hp-kw  { fill: var(--accent-soft); }
 .hp-cyl     { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
 .hp-cyl-top { fill: var(--surface);     stroke: var(--accent-ring); stroke-width: 1.5; }
-.badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 6px 13px; border: 1px solid var(--border-3); background: #12161C;
-  border-radius: var(--r-pill); margin-bottom: 34px;
-}
-.badge__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: cbPulse 2.2s ease-in-out infinite; }
-.badge__text { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--mint); letter-spacing: .02em; }
-@keyframes cbPulse { 0%, 100% { opacity: .4; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.15); } }
-
 .hero__title {
   font-family: var(--font-display); font-weight: 600;
   font-size: var(--fs-hero); line-height: 1.02; letter-spacing: var(--tracking-tight);
