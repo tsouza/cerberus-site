@@ -87,6 +87,13 @@
 
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 
+/* hero collapses to one column on mobile — graphic moves below the copy.
+   Lives here (not base.css) so it wins source-order over the .hero grid above. */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; min-height: 0; }
+  .hero__viz { max-width: 440px; margin-inline: auto; width: 100%; }
+}
+
 /* ---- Cards (signals / features) --------------------------- */
 .card {
   background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--r-lg);
