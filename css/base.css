@@ -85,7 +85,7 @@ h1, h2, h3, p { margin: 0; }
 @media (max-width: 900px) {
   :root { --section-y: 76px; }
   .grid-3, .grid-3--tight { grid-template-columns: 1fr; }
-  .hero { grid-template-columns: 1fr; gap: 40px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; min-height: 0; }
   .hero__viz { max-width: 440px; }
 }
 @media (max-width: 720px) {

@@ -46,9 +46,10 @@
 
 /* ---- Hero ------------------------------------------------- */
 .hero {
-  padding: 96px var(--gutter) 64px; max-width: var(--container); margin-inline: auto;
+  padding: 72px var(--gutter); max-width: var(--container); margin-inline: auto;
+  min-height: calc(100vh - 72px); /* fill below the 72px sticky nav so 01 sits below the fold */
   display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 36%, 440px);
-  gap: 56px; align-items: center;
+  gap: 56px; align-items: center; align-content: center;
 }
 .hero__copy { min-width: 0; }
 
