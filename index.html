@@ -183,8 +183,8 @@
           </div>
           <div class="pillar">
             <div class="pillar__no">③</div>
-            <h3 class="pillar__title">No reinvented parsers</h3>
-            <p class="pillar__body">Imports prometheus/promql/parser, loki/logql/syntax and tempo/traceql directly. If upstream parses it, cerberus parses it.</p>
+            <h3 class="pillar__title">Grammar-faithful parsers</h3>
+            <p class="pillar__body">PromQL uses the upstream Apache prometheus/promql/parser directly. LogQL and TraceQL are cerberus's own clean-room Apache reimplementations of the published grammars — same syntax, no copyleft.</p>
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@
         <span class="section__eyebrow">03 — ARCHITECTURE</span>
         <h2 class="section__title" style="max-width:22ch">One query pipeline, not three</h2>
         <p class="section__lead" style="max-width:60ch; margin-bottom:56px">
-          Each head parses with its reference upstream parser and lowers to a shared plan IR. A rule-based optimiser
+          Each head parses to a shared plan IR — PromQL on the upstream Apache parser, LogQL and TraceQL on cerberus's own Apache reimplementations of the grammars. A rule-based optimiser
           rewrites it; a closed typed-Frag emitter produces parameterised, escape-free ClickHouse SQL; the engine streams
           results. The three HTTP heads plug in as thin <span class="mono-accent">Lang</span> adapters — so a new
           optimisation costs one implementation, not three.
@@ -205,8 +205,8 @@
         <div class="arch">
           <div class="arch__heads">
             <div class="arch__head"><div class="arch__head-ql arch__head-ql--prom">PromQL</div><div class="arch__head-pkg">prometheus/promql/parser</div></div>
-            <div class="arch__head"><div class="arch__head-ql arch__head-ql--log">LogQL</div><div class="arch__head-pkg">loki/v3/pkg/logql/syntax</div></div>
-            <div class="arch__head"><div class="arch__head-ql arch__head-ql--trace">TraceQL</div><div class="arch__head-pkg">tempo/pkg/traceql</div></div>
+            <div class="arch__head"><div class="arch__head-ql arch__head-ql--log">LogQL</div><div class="arch__head-pkg">internal/logql/lsyntax</div></div>
+            <div class="arch__head"><div class="arch__head-ql arch__head-ql--trace">TraceQL</div><div class="arch__head-pkg">internal/traceql/ast</div></div>
           </div>
 
           <div class="arch__arrows">
@@ -239,7 +239,7 @@
         </div>
 
         <p class="arch__note">
-          The three HTTP heads import their upstream parsers directly and lower into the same IR — so optimiser rules, the
+          The three HTTP heads each parse to the same IR — so optimiser rules, the
           SQL builder and the execution engine are written once and shared. Cerberus reads the OpenTelemetry ClickHouse
           schema shape (column names, types, Map layout), not a specific exporter binary;
           <span class="mono-dim">CERBERUS_SCHEMA_*</span> overrides handle SigNoz and custom layouts, and
