@@ -68,6 +68,13 @@
 .hp-line--trace { stroke: var(--rose); }
 /* Grafana layer */
 .hp-label--graf { fill: var(--grafana); }
+/* cerberus layer — hollow box the three heads live inside */
+.hp-cerberus    { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.hp-label--cerb { fill: var(--text-faint); }
+/* muted mark: slate strokes, node keeps brand indigo as the one accent */
+.hp-mark--slate line { stroke: var(--text-faint); }
+/* flow cue: quiet down-chevrons in the gaps between layers */
+.hp-flow { fill: none; stroke: var(--text-fainter); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 /* backend layer */
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
 .hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
