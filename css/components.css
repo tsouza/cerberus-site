@@ -68,12 +68,6 @@
 .hp-line--trace { stroke: var(--rose); }
 /* Grafana layer */
 .hp-label--graf { fill: var(--grafana); }
-.hp-graf-flame    { fill: var(--grafana); }
-.hp-graf-flame-hi { fill: var(--grafana-light); }
-.hp-panel { stroke-width: 1.5; }
-.hp-panel--prom  { fill: var(--sky-fill);     stroke: var(--sky-ring); }
-.hp-panel--log   { fill: var(--emerald-fill); stroke: var(--emerald-ring); }
-.hp-panel--trace { fill: var(--rose-fill);    stroke: var(--rose-ring); }
 /* backend layer */
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
 .hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
