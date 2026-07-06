@@ -68,6 +68,9 @@
 .hp-line--trace { stroke: var(--rose); }
 /* Grafana layer */
 .hp-label--graf { fill: var(--grafana); }
+/* cerberus layer — hollow box the three heads live inside */
+.hp-cerberus    { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
+.hp-label--cerb { fill: var(--text-2); }
 /* backend layer */
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
 .hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
