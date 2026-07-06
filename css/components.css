@@ -165,7 +165,8 @@
 .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border-2); }
 .pillar { padding: 38px 30px 36px; border-bottom: 1px solid var(--border-2); border-right: 1px solid var(--border-2); }
 .pillar:last-child { border-right: none; }
-.pillar__no { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 600; color: var(--accent); margin-bottom: 18px; }
+/* real numerals, sized as lead figures — the old ①②③ glyphs rendered tiny */
+.pillar__no { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: var(--accent); letter-spacing: var(--tracking-snug); margin-bottom: 14px; }
 .pillar__title { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: var(--tracking-snug); color: var(--text); margin-bottom: 9px; }
 .pillar__body { font-size: 14.5px; line-height: 1.5; color: var(--text-dim); }
 @media (max-width: 900px) {
@@ -194,7 +195,10 @@
 .flow-arrow { color: #39424E; font-family: var(--font-mono); }
 .flow-target { background: var(--accent-fill-2); color: var(--accent-soft); border: 1px solid var(--accent-ring); border-radius: var(--r-md); padding: 16px 34px; text-align: center; }
 .flow-target__label { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: .01em; }
-.arch__note { font-size: var(--fs-xs); line-height: 1.55; color: var(--text-faint); max-width: 66ch; margin-top: 24px; }
+/* caption spans the full width of the .arch box above and is justified to it */
+.arch__note { font-size: var(--fs-xs); line-height: 1.55; color: var(--text-faint); text-align: justify; margin-top: 24px; }
+/* narrow screens: justify + long CERBERUS_* identifiers = whitespace rivers, so left-align */
+@media (max-width: 720px) { .arch__note { text-align: left; } }
 
 /* inline mono accents inside prose */
 .mono-accent { font-family: var(--font-mono); font-size: 15px; color: var(--accent-soft); }
