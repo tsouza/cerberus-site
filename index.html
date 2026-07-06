@@ -67,9 +67,9 @@
     <!-- ======================= HERO ======================= -->
     <section class="hero section" data-screen-label="Hero">
       <div class="hero__copy">
-        <h1 class="hero__title"><span class="hero__title-keep">Keep Grafana.</span><br>Swap the backend.</h1>
+        <h1 class="hero__title"><span class="hero__title-keep">Keep Grafana®.</span><br>Swap the backend.</h1>
         <p class="hero__lead">
-          A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> gateway for <strong>ClickHouse</strong> —
+          A drop-in <strong>Prometheus, Loki &amp; Tempo</strong> gateway for <strong>ClickHouse®</strong> —
           your PromQL, LogQL and TraceQL keep working, translated to SQL underneath.
         </p>
         <div class="cta-row">
@@ -80,36 +80,46 @@
 
       <!-- three query languages in a row, all backed by one ClickHouse (SQL) layer -->
       <div class="hero__viz" aria-hidden="true">
-        <svg viewBox="0 0 400 236" fill="none">
+        <svg viewBox="0 0 400 270" fill="none">
+          <!-- Grafana — the UI on top of the stack -->
+          <defs>
+            <linearGradient id="hp-grafana-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FCEE1F"/>
+              <stop offset="1" stop-color="#F15B2A"/>
+            </linearGradient>
+          </defs>
+          <path class="hp-card" d="M24,8 H376 A16,16 0 0 1 392,24 V68 H8 V24 A16,16 0 0 1 24,8 Z"/>
+          <svg x="148" y="20" width="32" height="35" viewBox="19.4 0 103.7 112.7">
+            <path fill="url(#hp-grafana-grad)" d="M122.9,49.9c-0.2-1.9-0.5-4.1-1.1-6.5c-0.6-2.4-1.6-5-2.9-7.8c-1.4-2.7-3.1-5.6-5.4-8.3c-0.9-1.1-1.9-2.1-2.9-3.2c1.6-6.3-1.9-11.8-1.9-11.8c-6.1-0.4-9.9,1.9-11.3,2.9c-0.2-0.1-0.5-0.2-0.7-0.3c-1-0.4-2.1-0.8-3.2-1.2c-1.1-0.3-2.2-0.7-3.3-0.9c-1.1-0.3-2.3-0.5-3.5-0.7c-0.2,0-0.4-0.1-0.6-0.1C83.5,3.6,75.9,0,75.9,0c-8.7,5.6-10.4,13.1-10.4,13.1s0,0.2-0.1,0.4c-0.5,0.1-0.9,0.3-1.4,0.4c-0.6,0.2-1.3,0.4-1.9,0.7c-0.6,0.3-1.3,0.5-1.9,0.8c-1.3,0.6-2.5,1.2-3.8,1.9c-1.2,0.7-2.4,1.4-3.5,2.2c-0.2-0.1-0.3-0.2-0.3-0.2c-11.7-4.5-22.1,0.9-22.1,0.9c-0.9,12.5,4.7,20.3,5.8,21.7c-0.3,0.8-0.5,1.5-0.8,2.3c-0.9,2.8-1.5,5.7-1.9,8.7c-0.1,0.4-0.1,0.9-0.2,1.3c-10.8,5.3-14,16.3-14,16.3c9,10.4,19.6,11,19.6,11l0,0c1.3,2.4,2.9,4.7,4.6,6.8c0.7,0.9,1.5,1.7,2.3,2.6c-3.3,9.4,0.5,17.3,0.5,17.3c10.1,0.4,16.7-4.4,18.1-5.5c1,0.3,2,0.6,3,0.9c3.1,0.8,6.3,1.3,9.4,1.4c0.8,0,1.6,0,2.4,0h0.4H80h0.5H81l0,0c4.7,6.8,13.1,7.7,13.1,7.7c5.9-6.3,6.3-12.4,6.3-13.8l0,0c0,0,0,0,0-0.1s0-0.2,0-0.2l0,0c0-0.1,0-0.2,0-0.3c1.2-0.9,2.4-1.8,3.6-2.8c2.4-2.1,4.4-4.6,6.2-7.2c0.2-0.2,0.3-0.5,0.5-0.7c6.7,0.4,11.4-4.2,11.4-4.2c-1.1-7-5.1-10.4-5.9-11l0,0c0,0,0,0-0.1-0.1l-0.1-0.1l0,0l-0.1-0.1c0-0.4,0.1-0.8,0.1-1.3c0.1-0.8,0.1-1.5,0.1-2.3v-0.6v-0.3v-0.1c0-0.2,0-0.1,0-0.2v-0.5v-0.6c0-0.2,0-0.4,0-0.6s0-0.4-0.1-0.6l-0.1-0.6l-0.1-0.6c-0.1-0.8-0.3-1.5-0.4-2.3c-0.7-3-1.9-5.9-3.4-8.4c-1.6-2.6-3.5-4.8-5.7-6.8c-2.2-1.9-4.6-3.5-7.2-4.6c-2.6-1.2-5.2-1.9-7.9-2.2c-1.3-0.2-2.7-0.2-4-0.2h-0.5h-0.1h-0.2h-0.2h-0.5c-0.2,0-0.4,0-0.5,0c-0.7,0.1-1.4,0.2-2,0.3c-2.7,0.5-5.2,1.5-7.4,2.8c-2.2,1.3-4.1,3-5.7,4.9s-2.8,3.9-3.6,6.1c-0.8,2.1-1.3,4.4-1.4,6.5c0,0.5,0,1.1,0,1.6c0,0.1,0,0.3,0,0.4v0.4c0,0.3,0,0.5,0.1,0.8c0.1,1.1,0.3,2.1,0.6,3.1c0.6,2,1.5,3.8,2.7,5.4s2.5,2.8,4,3.8s3,1.7,4.6,2.2c1.6,0.5,3.1,0.7,4.5,0.6c0.2,0,0.4,0,0.5,0c0.1,0,0.2,0,0.3,0s0.2,0,0.3,0c0.2,0,0.3,0,0.5,0h0.1h0.1c0.1,0,0.2,0,0.3,0c0.2,0,0.4-0.1,0.5-0.1c0.2,0,0.3-0.1,0.5-0.1c0.3-0.1,0.7-0.2,1-0.3c0.6-0.2,1.2-0.5,1.8-0.7c0.6-0.3,1.1-0.6,1.5-0.9c0.1-0.1,0.3-0.2,0.4-0.3c0.5-0.4,0.6-1.1,0.2-1.6c-0.4-0.4-1-0.5-1.5-0.3C88,74,87.9,74,87.7,74.1c-0.4,0.2-0.9,0.4-1.3,0.5c-0.5,0.1-1,0.3-1.5,0.4c-0.3,0-0.5,0.1-0.8,0.1c-0.1,0-0.3,0-0.4,0c-0.1,0-0.3,0-0.4,0s-0.3,0-0.4,0c-0.2,0-0.3,0-0.5,0c0,0-0.1,0,0,0h-0.1h-0.1c-0.1,0-0.1,0-0.2,0s-0.3,0-0.4-0.1c-1.1-0.2-2.3-0.5-3.4-1c-1.1-0.5-2.2-1.2-3.1-2.1c-1-0.9-1.8-1.9-2.5-3.1c-0.7-1.2-1.1-2.5-1.3-3.8c-0.1-0.7-0.2-1.4-0.1-2.1c0-0.2,0-0.4,0-0.6c0,0.1,0,0,0,0v-0.1v-0.1c0-0.1,0-0.2,0-0.3c0-0.4,0.1-0.7,0.2-1.1c0.5-3,2-5.9,4.3-8.1c0.6-0.6,1.2-1.1,1.9-1.5c0.7-0.5,1.4-0.9,2.1-1.2c0.7-0.3,1.5-0.6,2.3-0.8s1.6-0.4,2.4-0.4c0.4,0,0.8-0.1,1.2-0.1c0.1,0,0.2,0,0.3,0h0.3h0.2c0.1,0,0,0,0,0h0.1h0.3c0.9,0.1,1.8,0.2,2.6,0.4c1.7,0.4,3.4,1,5,1.9c3.2,1.8,5.9,4.5,7.5,7.8c0.8,1.6,1.4,3.4,1.7,5.3c0.1,0.5,0.1,0.9,0.2,1.4v0.3V66c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0,0.3v0.3v0.3c0,0.2,0,0.6,0,0.8c0,0.5-0.1,1-0.1,1.5c-0.1,0.5-0.1,1-0.2,1.5s-0.2,1-0.3,1.5c-0.2,1-0.6,1.9-0.9,2.9c-0.7,1.9-1.7,3.7-2.9,5.3c-2.4,3.3-5.7,6-9.4,7.7c-1.9,0.8-3.8,1.5-5.8,1.8c-1,0.2-2,0.3-3,0.3H81h-0.2h-0.3H80h-0.3c0.1,0,0,0,0,0h-0.1c-0.5,0-1.1,0-1.6-0.1c-2.2-0.2-4.3-0.6-6.4-1.2c-2.1-0.6-4.1-1.4-6-2.4c-3.8-2-7.2-4.9-9.9-8.2c-1.3-1.7-2.5-3.5-3.5-5.4s-1.7-3.9-2.3-5.9c-0.6-2-0.9-4.1-1-6.2v-0.4v-0.1v-0.1v-0.2V60v-0.1v-0.1v-0.2v-0.5V59l0,0v-0.2c0-0.3,0-0.5,0-0.8c0-1,0.1-2.1,0.3-3.2c0.1-1.1,0.3-2.1,0.5-3.2c0.2-1.1,0.5-2.1,0.8-3.2c0.6-2.1,1.3-4.1,2.2-6c1.8-3.8,4.1-7.2,6.8-9.9c0.7-0.7,1.4-1.3,2.2-1.9c0.3-0.3,1-0.9,1.8-1.4c0.8-0.5,1.6-1,2.5-1.4c0.4-0.2,0.8-0.4,1.3-0.6c0.2-0.1,0.4-0.2,0.7-0.3c0.2-0.1,0.4-0.2,0.7-0.3c0.9-0.4,1.8-0.7,2.7-1c0.2-0.1,0.5-0.1,0.7-0.2c0.2-0.1,0.5-0.1,0.7-0.2c0.5-0.1,0.9-0.2,1.4-0.4c0.2-0.1,0.5-0.1,0.7-0.2c0.2,0,0.5-0.1,0.7-0.1c0.2,0,0.5-0.1,0.7-0.1l0.4-0.1l0.4-0.1c0.2,0,0.5-0.1,0.7-0.1c0.3,0,0.5-0.1,0.8-0.1c0.2,0,0.6-0.1,0.8-0.1c0.2,0,0.3,0,0.5-0.1h0.3h0.2h0.2c0.3,0,0.5,0,0.8-0.1h0.4c0,0,0.1,0,0,0h0.1h0.2c0.2,0,0.5,0,0.7,0c0.9,0,1.8,0,2.7,0c1.8,0.1,3.6,0.3,5.3,0.6c3.4,0.6,6.7,1.7,9.6,3.2c2.9,1.4,5.6,3.2,7.8,5.1c0.1,0.1,0.3,0.2,0.4,0.4c0.1,0.1,0.3,0.2,0.4,0.4c0.3,0.2,0.5,0.5,0.8,0.7c0.3,0.2,0.5,0.5,0.8,0.7c0.2,0.3,0.5,0.5,0.7,0.8c1,1,1.9,2.1,2.7,3.1c1.6,2.1,2.9,4.2,3.9,6.2c0.1,0.1,0.1,0.2,0.2,0.4c0.1,0.1,0.1,0.2,0.2,0.4s0.2,0.5,0.4,0.7c0.1,0.2,0.2,0.5,0.3,0.7c0.1,0.2,0.2,0.5,0.3,0.7c0.4,0.9,0.7,1.8,1,2.7c0.5,1.4,0.8,2.6,1.1,3.6c0.1,0.4,0.5,0.7,0.9,0.7c0.5,0,0.8-0.4,0.8-0.9C123,52.7,123,51.4,122.9,49.9z"/>
+          </svg>
+          <text class="hp-label hp-label--graf" x="188" y="42">Grafana®</text>
+
           <!-- PromQL — metrics -->
-          <rect class="hp-card" x="8" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--prom" cx="26" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--prom" x="38" y="34">PromQL</text>
-          <polyline class="hp-spark hp-line--prom" points="24,84 38,70 52,88 66,58 80,80 94,62 108,76"/>
+          <rect class="hp-card" x="8" y="80" width="120" height="78"/>
+          <circle class="hp-dot--prom" cx="26" cy="100" r="3.5"/>
+          <text class="hp-label hp-label--prom" x="38" y="104">PromQL</text>
+          <polyline class="hp-spark hp-line--prom" points="24,140 38,128 52,142 66,120 80,138 94,124 108,134"/>
 
           <!-- LogQL — logs -->
-          <rect class="hp-card" x="140" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--log" cx="158" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--log" x="170" y="34">LogQL</text>
-          <path class="hp-logs hp-line--log" d="M156 64 H236 M156 76 H212 M156 88 H244"/>
+          <rect class="hp-card" x="140" y="80" width="120" height="78"/>
+          <circle class="hp-dot--log" cx="158" cy="100" r="3.5"/>
+          <text class="hp-label hp-label--log" x="170" y="104">LogQL</text>
+          <path class="hp-logs hp-line--log" d="M156 122 H236 M156 132 H212 M156 142 H244"/>
 
           <!-- TraceQL — traces -->
-          <rect class="hp-card" x="272" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--trace" cx="290" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--trace" x="302" y="34">TraceQL</text>
-          <path class="hp-bars hp-line--trace" d="M288 64 H360 M300 76 H372 M312 88 H356"/>
-
-          <!-- connectors into the backend layer -->
-          <path class="hp-conn" d="M68 104 V132 M200 104 V132 M332 104 V132"/>
+          <rect class="hp-card" x="272" y="80" width="120" height="78"/>
+          <circle class="hp-dot--trace" cx="290" cy="100" r="3.5"/>
+          <text class="hp-label hp-label--trace" x="302" y="104">TraceQL</text>
+          <path class="hp-bars hp-line--trace" d="M288 122 H360 M300 132 H372 M312 142 H356"/>
 
           <!-- ClickHouse — one backend, SQL -->
-          <rect class="hp-card" x="8" y="132" width="384" height="92" rx="16"/>
-          <circle class="hp-dot--ch" cx="26" cy="156" r="4"/>
-          <text class="hp-label hp-label--ch" x="38" y="160">ClickHouse</text>
-          <text class="hp-sql" x="38" y="188"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
-          <text class="hp-sql" x="38" y="206"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
-          <ellipse class="hp-cyl-top" cx="348" cy="160" rx="18" ry="5"/>
-          <path class="hp-cyl" d="M330 160 V196 A18 5 0 0 0 366 196 V160"/>
+          <path class="hp-card" d="M8,170 H392 V246 A16,16 0 0 1 376,262 H24 A16,16 0 0 1 8,246 V170 Z"/>
+          <circle class="hp-dot--ch" cx="26" cy="194" r="4"/>
+          <text class="hp-label hp-label--ch" x="38" y="198">ClickHouse®</text>
+          <text class="hp-sql" x="38" y="226"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
+          <text class="hp-sql" x="38" y="244"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
+          <ellipse class="hp-cyl-top" cx="348" cy="198" rx="18" ry="5"/>
+          <path class="hp-cyl" d="M330 198 V234 A18 5 0 0 0 366 234 V198"/>
         </svg>
       </div>
     </section>
@@ -119,7 +129,7 @@
       <span class="section__eyebrow">01 — THE GATEWAY</span>
       <h2 class="section__title" style="max-width:20ch">One guardian at the gate of three signals</h2>
       <p class="section__lead" style="max-width:58ch; margin-bottom:56px">
-        Cerberus speaks each upstream HTTP API verbatim, so Grafana sees three ordinary datasources. Your dashboards,
+        Cerberus speaks each upstream HTTP API verbatim, so Grafana® sees three ordinary datasources. Your dashboards,
         alerts and CLI tooling keep using the exact query languages they already use — cerberus does the translation.
       </p>
 
@@ -133,7 +143,7 @@
             <span class="card__ql">PromQL</span>
           </div>
           <h3 class="card__title">Metrics</h3>
-          <p class="card__body">Counters, gauges and histograms — translated to ClickHouse SQL and held at 574/574 on the CNCF PromQL Compliance Tester.</p>
+          <p class="card__body">Counters, gauges and histograms — translated to ClickHouse® SQL and held at 574/574 on the CNCF PromQL Compliance Tester.</p>
         </article>
         <!-- LogQL / Logs -->
         <article class="card">
@@ -144,7 +154,7 @@
             <span class="card__ql">LogQL</span>
           </div>
           <h3 class="card__title">Logs</h3>
-          <p class="card__body">Stream selectors, line filters and metric queries — diffed against a real Loki on Grafana's own bench corpus.</p>
+          <p class="card__body">Stream selectors, line filters and metric queries — diffed against a real Loki on Grafana®'s own bench corpus.</p>
         </article>
         <!-- TraceQL / Traces -->
         <article class="card">
@@ -167,14 +177,14 @@
         <h2 class="section__title" style="max-width:24ch">Three stores is a tax you stop paying</h2>
         <p class="section__lead" style="max-width:62ch; margin-bottom:64px">
           Metrics, logs and traces rarely share a store — the usual answer is Prometheus + Loki + Tempo: three retention
-          policies and three storage bills for what is largely the same OTLP data sliced three ways. ClickHouse is a great
+          policies and three storage bills for what is largely the same OTLP data sliced three ways. ClickHouse® is a great
           single store for all three signals; cerberus supplies the missing query side.
         </p>
         <div class="why-grid">
           <div class="pillar">
             <div class="pillar__no">①</div>
-            <h3 class="pillar__title">No Grafana plugin</h3>
-            <p class="pillar__body">Cerberus speaks each upstream HTTP API verbatim — /api/v1/query_range, /loki/api/v1/query_range, /api/search. Grafana sees three normal datasources.</p>
+            <h3 class="pillar__title">No Grafana® plugin</h3>
+            <p class="pillar__body">Cerberus speaks each upstream HTTP API verbatim — /api/v1/query_range, /loki/api/v1/query_range, /api/search. Grafana® sees three normal datasources.</p>
           </div>
           <div class="pillar">
             <div class="pillar__no">②</div>
@@ -197,7 +207,7 @@
         <h2 class="section__title" style="max-width:22ch">One query pipeline, not three</h2>
         <p class="section__lead" style="max-width:60ch; margin-bottom:56px">
           Each head parses to a shared plan IR — PromQL on the upstream Apache parser, LogQL and TraceQL on cerberus's own Apache reimplementations of the grammars. A rule-based optimiser
-          rewrites it; a closed typed-Frag emitter produces parameterised, escape-free ClickHouse SQL; the engine streams
+          rewrites it; a closed typed-Frag emitter produces parameterised, escape-free ClickHouse® SQL; the engine streams
           results. The three HTTP heads plug in as thin <span class="mono-accent">Lang</span> adapters — so a new
           optimisation costs one implementation, not three.
         </p>
@@ -234,13 +244,13 @@
               <div class="flow-box__sub">parameterised · escape-free · streamed by internal/engine</div>
             </div>
             <div class="flow-arrow">↓</div>
-            <div class="flow-target"><div class="flow-target__label">ClickHouse</div></div>
+            <div class="flow-target"><div class="flow-target__label">ClickHouse®</div></div>
           </div>
         </div>
 
         <p class="arch__note">
           The three HTTP heads each parse to the same IR — so optimiser rules, the
-          SQL builder and the execution engine are written once and shared. Cerberus reads the OpenTelemetry ClickHouse
+          SQL builder and the execution engine are written once and shared. Cerberus reads the OpenTelemetry ClickHouse®
           schema shape (column names, types, Map layout), not a specific exporter binary;
           <span class="mono-dim">CERBERUS_SCHEMA_*</span> overrides handle SigNoz and custom layouts, and
           <span class="mono-dim">CERBERUS_AUTO_CREATE_SCHEMA</span> bootstraps tables.
@@ -253,7 +263,7 @@
       <span class="section__eyebrow">04 — INSIDE THE ENGINE</span>
       <h2 class="section__title" style="max-width:24ch">A real query engine, not a translator</h2>
       <p class="section__lead" style="max-width:62ch; margin-bottom:56px">
-        Between the parser and ClickHouse sits an optimiser, a typed SQL builder and an execution engine with the
+        Between the parser and ClickHouse® sits an optimiser, a typed SQL builder and an execution engine with the
         resilience controls you expect from something on the hot path of every dashboard, alert and on-call query.
       </p>
 
@@ -263,7 +273,7 @@
 
       <div class="req-bar">
         <div class="req-bar__label">REQUIREMENTS</div>
-        <div class="req-bar__item"><span>ClickHouse</span><b>24.8+</b></div>
+        <div class="req-bar__item"><span>ClickHouse®</span><b>24.8+</b></div>
         <div class="req-bar__div"></div>
         <div class="req-bar__item"><span>OTel CH exporter schema</span><b>otel_metrics_* · otel_logs · otel_traces</b></div>
         <div class="req-bar__div"></div>
@@ -276,8 +286,8 @@
       <span class="section__eyebrow">05 — QUICK START</span>
       <h2 class="section__title" style="max-width:20ch">From clone to dashboards in one command</h2>
       <p class="section__lead" style="max-width:58ch; margin-bottom:36px">
-        The compose stack builds cerberus, boots single-node ClickHouse, loads a deterministic OTel fixture, and brings up
-        Grafana pre-provisioned with cerberus as three datasources. A fresh dashboard populates in ~30s.
+        The compose stack builds cerberus, boots single-node ClickHouse®, loads a deterministic OTel fixture, and brings up
+        Grafana® pre-provisioned with cerberus as three datasources. A fresh dashboard populates in ~30s.
       </p>
 
       <div class="tabs" role="tablist">
@@ -292,7 +302,7 @@
 git clone https://github.com/tsouza/cerberus.git &amp;&amp; cd cerberus
 docker compose up --wait
 
-<span class="c-comment"># Grafana auto-login on :3000 · cerberus on :8080</span>
+<span class="c-comment"># Grafana® auto-login on :3000 · cerberus on :8080</span>
 open http://localhost:3000</code></pre>
       </div>
 
@@ -330,7 +340,7 @@ helm install cerberus \
         <h2 class="section__title" style="max-width:24ch">Held to reference, case for case</h2>
         <p class="section__lead" style="max-width:62ch; margin-bottom:40px">
           Every head is diffed against its real upstream engine on shared, seeded data — pinning observed semantics on
-          ClickHouse against an oracle, not just emitted SQL. No allow-lists.
+          ClickHouse® against an oracle, not just emitted SQL. No allow-lists.
         </p>
 
         <div class="grid-3 grid-3--tight" style="margin-bottom:36px">
@@ -349,7 +359,7 @@ helm install cerberus \
               <span class="head-card__name head-card__name--log">LogQL</span>
               <span class="head-card__vs">vs real Loki</span>
             </div>
-            <p class="head-card__body">Diffed query-for-query against a real Loki on Grafana's own pkg/logql/bench corpus — responses compared on ClickHouse against the upstream engine, not just the emitted SQL.</p>
+            <p class="head-card__body">Diffed query-for-query against a real Loki on Grafana®'s own pkg/logql/bench corpus — responses compared on ClickHouse® against the upstream engine, not just the emitted SQL.</p>
             <div class="head-card__method">differential harness · logql/bench corpus</div>
           </article>
           <article class="head-card">
@@ -382,7 +392,7 @@ helm install cerberus \
           </svg>
         </span>
         <h2 class="cta-card__title">Swap the backend, not the workflow</h2>
-        <p class="cta-card__lead">Open source under Apache 2.0. Point Grafana at cerberus and your PromQL, LogQL and TraceQL just work.</p>
+        <p class="cta-card__lead">Open source under Apache 2.0. Point Grafana® at cerberus and your PromQL, LogQL and TraceQL just work.</p>
         <div class="cta-card__actions">
           <a class="btn btn--primary" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">View on GitHub</a>
           <a class="btn btn--ghost" href="#start">Quick start</a>
@@ -413,6 +423,11 @@ helm install cerberus \
         <a class="footer__link" href="https://deepwiki.com/tsouza/cerberus" target="_blank" rel="noopener">DeepWiki</a>
         <a class="footer__link" href="https://pkg.go.dev/github.com/tsouza/cerberus" target="_blank" rel="noopener">Go reference</a>
       </nav>
+    </div>
+    <div class="container footer__legal">
+      Grafana® and the Grafana logo are trademarks of Grafana Labs. ClickHouse® and the ClickHouse logo are
+      trademarks of ClickHouse, Inc. Prometheus, Loki and Tempo are trademarks of their respective owners.
+      cerberus is an independent project and is not affiliated with, endorsed by, or sponsored by any of the foregoing.
     </div>
   </footer>
 

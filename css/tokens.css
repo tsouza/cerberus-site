@@ -38,6 +38,7 @@
   --rose:          #FB7185;  /* TraceQL                       */
   --mint:          #9FE7C6;  /* positive / status text        */
   --code-var:      #7DD3FC;  /* env-var highlight in code     */
+  --grafana:       #F15B2A;  /* Grafana wordmark (logo gradient, dark stop) */
 
   /* tinted fills (used behind icons / boxes) */
   --accent-fill:   rgba(124,140,255,.08);
