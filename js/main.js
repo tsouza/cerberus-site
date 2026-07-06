@@ -86,12 +86,31 @@
     });
   }
 
+  /* ---- mobile nav toggle ---------------------------------- */
+  function initNav() {
+    const toggle = $('.nav__toggle');
+    const menu = $('#nav-menu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    // collapse the panel after a jump-link so it doesn't cover the target
+    $$('.nav__link', menu).forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   /* ---- boot ----------------------------------------------- */
   function init() {
     renderFeatures();
     renderLayers();
     initTabs();
     initCopy();
+    initNav();
   }
 
   if (document.readyState === 'loading') {

@@ -86,6 +86,5 @@ h1, h2, h3, p { margin: 0; }
   :root { --section-y: 76px; }
   .grid-3, .grid-3--tight { grid-template-columns: 1fr; }
 }
-@media (max-width: 720px) {
-  .nav__links a:not(.btn) { display: none; }
-}
+/* the old "hide nav links on mobile" hack is superseded by the .nav__toggle
+   menu (components.css); links now live in the toggled panel instead. */

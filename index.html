@@ -48,11 +48,18 @@
         </span>
         <span class="brand__name">cerberus</span>
       </a>
-      <nav class="nav__links">
-        <a class="nav__link" href="#concept">How it works</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav__links" id="nav-menu">
+        <a class="nav__link" href="#concept">Gateway</a>
+        <a class="nav__link" href="#why">Why</a>
         <a class="nav__link" href="#architecture">Architecture</a>
         <a class="nav__link" href="#features">Engine</a>
         <a class="nav__link" href="#start">Quick start</a>
+        <a class="nav__link" href="#correctness">Correctness</a>
         <a class="btn btn--github" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
           GitHub
@@ -140,6 +147,11 @@
           <path class="hp-cyl" d="M330 232 V268 A18 5 0 0 0 366 268 V232"/>
         </svg>
       </div>
+
+      <a class="hero__scroll" href="#concept" aria-label="Scroll to how it works">
+        <span>scroll</span>
+        <svg class="hero__scroll-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
     </section>
 
     <!-- ======================= CONCEPT ======================= -->
@@ -191,26 +203,38 @@
     <!-- ======================= WHY ======================= -->
     <section id="why" class="section section--band">
       <div class="container section--pad">
-        <span class="section__eyebrow">02 — WHY CERBERUS</span>
-        <h2 class="section__title" style="max-width:24ch">Three stores is a tax you stop paying</h2>
-        <p class="section__lead" style="max-width:62ch; margin-bottom:64px">
-          Metrics, logs and traces rarely share a store — the usual answer is Prometheus + Loki + Tempo: three retention
-          policies and three storage bills for what is largely the same OTLP data sliced three ways. ClickHouse® is a great
-          single store for all three signals; cerberus supplies the missing query side.
-        </p>
+        <div class="section__intro" style="margin-bottom:64px">
+          <div class="section__intro-copy">
+            <span class="section__eyebrow">02 — WHY CERBERUS</span>
+            <h2 class="section__title" style="max-width:24ch">Three stores is a tax you stop paying</h2>
+            <p class="section__lead" style="max-width:62ch">
+              Metrics, logs and traces rarely share a store — the usual answer is Prometheus + Loki + Tempo: three retention
+              policies and three storage bills for what is largely the same OTLP data sliced three ways. ClickHouse® is a great
+              single store for all three signals; cerberus supplies the missing query side.
+            </p>
+          </div>
+          <figure class="stat-anchor">
+            <div class="stat-anchor__num">
+              <span class="stat-anchor__n stat-anchor__n--muted">3</span>
+              <span class="stat-anchor__glyph" aria-hidden="true">→</span>
+              <span class="stat-anchor__n stat-anchor__n--accent">1</span>
+            </div>
+            <figcaption class="stat-anchor__cap">three stores, retention policies and bills — collapsed to one ClickHouse® store</figcaption>
+          </figure>
+        </div>
         <div class="why-grid">
           <div class="pillar">
-            <div class="pillar__no">①</div>
+            <div class="pillar__tag">COMPATIBILITY</div>
             <h3 class="pillar__title">No Grafana® plugin</h3>
             <p class="pillar__body">Cerberus speaks each upstream HTTP API verbatim — /api/v1/query_range, /loki/api/v1/query_range, /api/search. Grafana® sees three normal datasources.</p>
           </div>
           <div class="pillar">
-            <div class="pillar__no">②</div>
+            <div class="pillar__tag">MIGRATION</div>
             <h3 class="pillar__title">No custom QL</h3>
             <p class="pillar__body">PromQL, LogQL, TraceQL — exactly as your dashboards and alerts already use them. Nothing to relearn.</p>
           </div>
           <div class="pillar">
-            <div class="pillar__no">③</div>
+            <div class="pillar__tag">LICENSING</div>
             <h3 class="pillar__title">Grammar-faithful parsers</h3>
             <p class="pillar__body">PromQL uses the upstream Apache prometheus/promql/parser directly. LogQL and TraceQL are cerberus's own clean-room Apache reimplementations of the published grammars — same syntax, no copyleft.</p>
           </div>
@@ -352,42 +376,60 @@ helm install cerberus \
     </section>
 
     <!-- ======================= CORRECTNESS ======================= -->
-    <section class="section section--band-top" data-screen-label="Correctness">
+    <section id="correctness" class="section section--band-top" data-screen-label="Correctness">
       <div class="container" style="padding-block:96px">
-        <span class="section__eyebrow">06 — CORRECTNESS</span>
-        <h2 class="section__title" style="max-width:24ch">Held to reference, case for case</h2>
-        <p class="section__lead" style="max-width:62ch; margin-bottom:40px">
-          Every head is diffed against its real upstream engine on shared, seeded data — pinning observed semantics on
-          ClickHouse® against an oracle, not just emitted SQL. No allow-lists.
-        </p>
+        <div class="section__intro" style="margin-bottom:40px">
+          <div class="section__intro-copy">
+            <span class="section__eyebrow">06 — CORRECTNESS</span>
+            <h2 class="section__title" style="max-width:24ch">Held to reference, case for case</h2>
+            <p class="section__lead" style="max-width:62ch">
+              Every head is diffed against its real upstream engine on shared, seeded data — pinning observed semantics on
+              ClickHouse® against an oracle, not just emitted SQL. No allow-lists.
+            </p>
+          </div>
+          <figure class="stat-anchor">
+            <div class="stat-anchor__num">
+              <span class="stat-anchor__n stat-anchor__n--sky">574</span>
+              <span class="stat-anchor__glyph" aria-hidden="true">/</span>
+              <span class="stat-anchor__n stat-anchor__n--sky">574</span>
+            </div>
+            <figcaption class="stat-anchor__cap">PromQL cases on the CNCF compliance tester — diffed vs a real Prometheus</figcaption>
+          </figure>
+        </div>
 
         <div class="grid-3 grid-3--tight" style="margin-bottom:36px">
-          <article class="head-card">
-            <div class="head-card__head">
-              <span class="head-card__dot head-card__dot--prom"></span>
-              <span class="head-card__name head-card__name--prom">PromQL</span>
-              <span class="head-card__vs">vs real Prometheus</span>
+          <article class="card card--feature">
+            <div class="card__head">
+              <span class="icon-chip icon-chip--sky">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>
+              </span>
+              <span class="card__ql">vs real Prometheus</span>
             </div>
-            <p class="head-card__body">Run through the third-party CNCF / PromLabs Compliance Tester against a real prom/prometheus seeded with identical data — the same suite the CNCF Prometheus Conformance Program uses. No allow-list.</p>
-            <div class="head-card__method">CNCF / PromLabs Compliance Tester</div>
+            <h3 class="card__title">PromQL</h3>
+            <p class="card__body">Run through the third-party CNCF / PromLabs Compliance Tester against a real prom/prometheus seeded with identical data — the same suite the CNCF Prometheus Conformance Program uses. No allow-list.</p>
+            <div class="card__mono">CNCF / PromLabs Compliance Tester</div>
           </article>
-          <article class="head-card">
-            <div class="head-card__head">
-              <span class="head-card__dot head-card__dot--log"></span>
-              <span class="head-card__name head-card__name--log">LogQL</span>
-              <span class="head-card__vs">vs real Loki</span>
+          <article class="card card--feature">
+            <div class="card__head">
+              <span class="icon-chip icon-chip--emerald">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="7" x2="19" y2="7"/><line x1="5" y1="12" x2="15" y2="12"/><line x1="5" y1="17" x2="17" y2="17"/></svg>
+              </span>
+              <span class="card__ql">vs real Loki</span>
             </div>
-            <p class="head-card__body">Diffed query-for-query against a real Loki on Grafana®'s own pkg/logql/bench corpus — responses compared on ClickHouse® against the upstream engine, not just the emitted SQL.</p>
-            <div class="head-card__method">differential harness · logql/bench corpus</div>
+            <h3 class="card__title">LogQL</h3>
+            <p class="card__body">Diffed query-for-query against a real Loki on Grafana®'s own pkg/logql/bench corpus — responses compared on ClickHouse® against the upstream engine, not just the emitted SQL.</p>
+            <div class="card__mono">differential harness · logql/bench corpus</div>
           </article>
-          <article class="head-card">
-            <div class="head-card__head">
-              <span class="head-card__dot head-card__dot--trace"></span>
-              <span class="head-card__name head-card__name--trace">TraceQL</span>
-              <span class="head-card__vs">vs real Tempo</span>
+          <article class="card card--feature">
+            <div class="card__head">
+              <span class="icon-chip icon-chip--rose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="12" r="2.4"/><circle cx="9" cy="18" r="2.4"/><path d="M8 7.5l8 3.2M16.5 13.8L10.5 16.6"/></svg>
+              </span>
+              <span class="card__ql">vs real Tempo</span>
             </div>
-            <p class="head-card__body">Served through the upstream Tempo HTTP API and diffed against a real Tempo on a maintained TXTAR query corpus — the newest head, validated the same case-for-case way.</p>
-            <div class="head-card__method">differential harness · TXTAR corpus</div>
+            <h3 class="card__title">TraceQL</h3>
+            <p class="card__body">Served through the upstream Tempo HTTP API and diffed against a real Tempo on a maintained TXTAR query corpus — the newest head, validated the same case-for-case way.</p>
+            <div class="card__mono">differential harness · TXTAR corpus</div>
           </article>
         </div>
 
