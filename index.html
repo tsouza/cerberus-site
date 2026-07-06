@@ -80,36 +80,44 @@
 
       <!-- three query languages in a row, all backed by one ClickHouse (SQL) layer -->
       <div class="hero__viz" aria-hidden="true">
-        <svg viewBox="0 0 400 236" fill="none">
+        <svg viewBox="0 0 400 274" fill="none">
+          <!-- Grafana — the UI on top of the stack -->
+          <rect class="hp-card" x="8" y="8" width="384" height="60" rx="16"/>
+          <g transform="translate(20,17)">
+            <path class="hp-graf-flame" d="M10 0 C4 6 1 12 1 17 C1 21.4 5 24 10 24 C15 24 19 21.4 19 17 C19 12 16 6 10 0 Z"/>
+            <path class="hp-graf-flame-hi" d="M10 6 C7 10 5 14 5 17 C5 19.8 7.2 22 10 22 C12.8 22 15 19.8 15 17 C15 14 13 10 10 6 Z"/>
+          </g>
+          <text class="hp-label hp-label--graf" x="48" y="34">Grafana</text>
+          <rect class="hp-panel hp-panel--prom" x="200" y="42" width="52" height="16" rx="4"/>
+          <rect class="hp-panel hp-panel--log" x="268" y="42" width="52" height="16" rx="4"/>
+          <rect class="hp-panel hp-panel--trace" x="336" y="42" width="52" height="16" rx="4"/>
+
           <!-- PromQL — metrics -->
-          <rect class="hp-card" x="8" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--prom" cx="26" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--prom" x="38" y="34">PromQL</text>
-          <polyline class="hp-spark hp-line--prom" points="24,84 38,70 52,88 66,58 80,80 94,62 108,76"/>
+          <rect class="hp-card" x="8" y="82" width="120" height="78" rx="16"/>
+          <circle class="hp-dot--prom" cx="26" cy="102" r="3.5"/>
+          <text class="hp-label hp-label--prom" x="38" y="106">PromQL</text>
+          <polyline class="hp-spark hp-line--prom" points="24,150 38,138 52,152 66,130 80,148 94,134 108,144"/>
 
           <!-- LogQL — logs -->
-          <rect class="hp-card" x="140" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--log" cx="158" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--log" x="170" y="34">LogQL</text>
-          <path class="hp-logs hp-line--log" d="M156 64 H236 M156 76 H212 M156 88 H244"/>
+          <rect class="hp-card" x="140" y="82" width="120" height="78" rx="16"/>
+          <circle class="hp-dot--log" cx="158" cy="102" r="3.5"/>
+          <text class="hp-label hp-label--log" x="170" y="106">LogQL</text>
+          <path class="hp-logs hp-line--log" d="M156 132 H236 M156 142 H212 M156 152 H244"/>
 
           <!-- TraceQL — traces -->
-          <rect class="hp-card" x="272" y="8" width="120" height="96" rx="16"/>
-          <circle class="hp-dot--trace" cx="290" cy="30" r="3.5"/>
-          <text class="hp-label hp-label--trace" x="302" y="34">TraceQL</text>
-          <path class="hp-bars hp-line--trace" d="M288 64 H360 M300 76 H372 M312 88 H356"/>
-
-          <!-- connectors into the backend layer -->
-          <path class="hp-conn" d="M68 104 V132 M200 104 V132 M332 104 V132"/>
+          <rect class="hp-card" x="272" y="82" width="120" height="78" rx="16"/>
+          <circle class="hp-dot--trace" cx="290" cy="102" r="3.5"/>
+          <text class="hp-label hp-label--trace" x="302" y="106">TraceQL</text>
+          <path class="hp-bars hp-line--trace" d="M288 132 H360 M300 142 H372 M312 152 H356"/>
 
           <!-- ClickHouse — one backend, SQL -->
-          <rect class="hp-card" x="8" y="132" width="384" height="92" rx="16"/>
-          <circle class="hp-dot--ch" cx="26" cy="156" r="4"/>
-          <text class="hp-label hp-label--ch" x="38" y="160">ClickHouse</text>
-          <text class="hp-sql" x="38" y="188"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
-          <text class="hp-sql" x="38" y="206"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
-          <ellipse class="hp-cyl-top" cx="348" cy="160" rx="18" ry="5"/>
-          <path class="hp-cyl" d="M330 160 V196 A18 5 0 0 0 366 196 V160"/>
+          <rect class="hp-card" x="8" y="174" width="384" height="92" rx="16"/>
+          <circle class="hp-dot--ch" cx="26" cy="198" r="4"/>
+          <text class="hp-label hp-label--ch" x="38" y="202">ClickHouse</text>
+          <text class="hp-sql" x="38" y="230"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
+          <text class="hp-sql" x="38" y="248"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
+          <ellipse class="hp-cyl-top" cx="348" cy="202" rx="18" ry="5"/>
+          <path class="hp-cyl" d="M330 202 V238 A18 5 0 0 0 366 238 V202"/>
         </svg>
       </div>
     </section>
@@ -413,6 +421,11 @@ helm install cerberus \
         <a class="footer__link" href="https://deepwiki.com/tsouza/cerberus" target="_blank" rel="noopener">DeepWiki</a>
         <a class="footer__link" href="https://pkg.go.dev/github.com/tsouza/cerberus" target="_blank" rel="noopener">Go reference</a>
       </nav>
+    </div>
+    <div class="container footer__legal">
+      Grafana® and the Grafana logo are trademarks of Grafana Labs. ClickHouse® and the ClickHouse logo are
+      trademarks of ClickHouse, Inc. Prometheus, Loki and Tempo are trademarks of their respective owners.
+      cerberus is an independent project and is not affiliated with, endorsed by, or sponsored by any of the foregoing.
     </div>
   </footer>
 

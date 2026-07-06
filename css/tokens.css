@@ -38,6 +38,8 @@
   --rose:          #FB7185;  /* TraceQL                       */
   --mint:          #9FE7C6;  /* positive / status text        */
   --code-var:      #7DD3FC;  /* env-var highlight in code     */
+  --grafana:       #F46800;  /* Grafana brand orange (logo)   */
+  --grafana-light: #FFC087;  /* Grafana logo inner highlight  */
 
   /* tinted fills (used behind icons / boxes) */
   --accent-fill:   rgba(124,140,255,.08);

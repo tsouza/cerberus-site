@@ -66,8 +66,15 @@
 .hp-line--prom  { stroke: var(--sky); }
 .hp-line--log   { stroke: var(--emerald); }
 .hp-line--trace { stroke: var(--rose); }
+/* Grafana layer */
+.hp-label--graf { fill: var(--grafana); }
+.hp-graf-flame    { fill: var(--grafana); }
+.hp-graf-flame-hi { fill: var(--grafana-light); }
+.hp-panel { stroke-width: 1.5; }
+.hp-panel--prom  { fill: var(--sky-fill);     stroke: var(--sky-ring); }
+.hp-panel--log   { fill: var(--emerald-fill); stroke: var(--emerald-ring); }
+.hp-panel--trace { fill: var(--rose-fill);    stroke: var(--rose-ring); }
 /* backend layer */
-.hp-conn { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; stroke-linecap: round; }
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
 .hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
 .hp-kw  { fill: var(--accent-soft); }
@@ -221,6 +228,7 @@
 .footer__brand { display: flex; align-items: center; gap: 11px; }
 .footer__mark { display: inline-flex; width: 26px; height: 26px; }
 .footer__name { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--text-2); }
+.footer__legal { padding-bottom: 40px; font-size: 12px; line-height: 1.6; color: var(--text-fainter); border-top: 1px solid var(--border-faint); padding-top: 20px; }
 .footer__meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); padding-left: 10px; }
 .footer__links { display: flex; gap: 26px; flex-wrap: wrap; }
 .footer__link { text-decoration: none; color: var(--text-muted); font-size: var(--fs-xs); font-weight: 500; }
