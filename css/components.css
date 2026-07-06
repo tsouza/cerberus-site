@@ -70,7 +70,10 @@
 .hp-label--graf { fill: var(--grafana); }
 /* cerberus layer — hollow box the three heads live inside */
 .hp-cerberus    { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; stroke-dasharray: 5 4; }
-.hp-label--cerb { fill: var(--text-2); }
+.hp-label--cerb { fill: var(--text-faint); }
+/* muted, slate variant of the brand mark so it recedes inside the box */
+.hp-mark--slate line        { stroke: var(--text-faint); }
+.hp-mark--slate .mark__node { fill: var(--text-faint); }
 /* backend layer */
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }
 .hp-sql { font-family: var(--font-mono); font-size: var(--fs-xs); fill: var(--text-faint); }
