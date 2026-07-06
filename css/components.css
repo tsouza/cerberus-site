@@ -69,7 +69,7 @@
 /* Grafana layer */
 .hp-label--graf { fill: var(--grafana); }
 /* cerberus layer — hollow box the three heads live inside */
-.hp-cerberus    { fill: var(--accent-fill); stroke: var(--accent-ring); stroke-width: 1.5; }
+.hp-cerberus    { fill: none; stroke: var(--accent-ring); stroke-width: 1.5; stroke-dasharray: 5 4; }
 .hp-label--cerb { fill: var(--text-2); }
 /* backend layer */
 .hp-dot--ch, .hp-label--ch { fill: var(--accent-soft); }

@@ -80,7 +80,7 @@
 
       <!-- three query languages in a row, all backed by one ClickHouse (SQL) layer -->
       <div class="hero__viz" aria-hidden="true">
-        <svg viewBox="0 0 400 322" fill="none">
+        <svg viewBox="0 0 400 308" fill="none">
           <!-- Grafana — the UI on top of the stack -->
           <defs>
             <linearGradient id="hp-grafana-grad" x1="0" y1="0" x2="0" y2="1">
@@ -95,7 +95,7 @@
           <text class="hp-label hp-label--graf" x="188" y="42">Grafana®</text>
 
           <!-- cerberus — the hollow gateway the three heads live inside -->
-          <rect class="hp-cerberus" x="8" y="80" width="384" height="130" rx="14"/>
+          <rect class="hp-cerberus" x="8" y="80" width="384" height="116"/>
 
           <!-- PromQL — metrics -->
           <rect class="hp-card" x="20" y="94" width="112" height="64"/>
@@ -116,7 +116,7 @@
           <path class="hp-bars hp-line--trace" d="M284 130 H356 M296 139 H372 M308 148 H352"/>
 
           <!-- cerberus brand mark, inside its box, above the backend -->
-          <svg x="150" y="171" width="26" height="26" viewBox="0 0 32 32">
+          <svg x="150" y="163" width="26" height="26" viewBox="0 0 32 32">
             <g class="mark">
               <line class="mark__prom"  x1="14.38" y1="8.1" x2="6.62"  y2="22.9"/>
               <line class="mark__trace" x1="17.62" y1="8.1" x2="25.38" y2="22.9"/>
@@ -124,16 +124,16 @@
               <circle class="mark__node" cx="16" cy="18.6" r="2.9"/>
             </g>
           </svg>
-          <text class="hp-label hp-label--cerb" x="182" y="189">cerberus</text>
+          <text class="hp-label hp-label--cerb" x="182" y="181">cerberus</text>
 
           <!-- ClickHouse — one backend, SQL -->
-          <path class="hp-card" d="M8,222 H392 V298 A16,16 0 0 1 376,314 H24 A16,16 0 0 1 8,298 V222 Z"/>
-          <circle class="hp-dot--ch" cx="26" cy="246" r="4"/>
-          <text class="hp-label hp-label--ch" x="38" y="250">ClickHouse®</text>
-          <text class="hp-sql" x="38" y="278"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
-          <text class="hp-sql" x="38" y="296"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
-          <ellipse class="hp-cyl-top" cx="348" cy="250" rx="18" ry="5"/>
-          <path class="hp-cyl" d="M330 250 V286 A18 5 0 0 0 366 286 V250"/>
+          <path class="hp-card" d="M8,208 H392 V284 A16,16 0 0 1 376,300 H24 A16,16 0 0 1 8,284 V208 Z"/>
+          <circle class="hp-dot--ch" cx="26" cy="232" r="4"/>
+          <text class="hp-label hp-label--ch" x="38" y="236">ClickHouse®</text>
+          <text class="hp-sql" x="38" y="264"><tspan class="hp-kw">SELECT</tspan> ts, value</text>
+          <text class="hp-sql" x="38" y="282"><tspan class="hp-kw">FROM</tspan> otel_metrics</text>
+          <ellipse class="hp-cyl-top" cx="348" cy="232" rx="18" ry="5"/>
+          <path class="hp-cyl" d="M330 232 V268 A18 5 0 0 0 366 268 V232"/>
         </svg>
       </div>
     </section>
