@@ -252,6 +252,8 @@
 .cta-card__title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2-cta); line-height: 1.08; letter-spacing: var(--tracking-h2); color: var(--text); margin-bottom: 16px; position: relative; }
 .cta-card__lead { font-size: var(--fs-body); line-height: 1.5; color: var(--text-muted); max-width: 50ch; margin: 0 auto 34px; position: relative; }
 .cta-card__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+.cta-card__ph { display: inline-flex; margin-top: 34px; position: relative; border-radius: var(--r-md); }
+.cta-card__ph img { display: block; width: 250px; height: 54px; }
 
 /* ---- Footer ----------------------------------------------- */
 .footer { border-top: 1px solid var(--border); }
