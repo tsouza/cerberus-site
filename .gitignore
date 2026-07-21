@@ -11,3 +11,4 @@ Thumbs.db
 # optional local server / tooling
 node_modules/
 .cache/
+.serena/
