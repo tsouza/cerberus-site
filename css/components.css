@@ -262,6 +262,15 @@
 .mstep__cmd code { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; color: var(--code-fg); white-space: pre; display: block; }
 .mstep__prompt { color: var(--text-fainter); } /* the "$" — prompt, not part of the command */
 .mstep__manual { margin-top: 14px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; color: var(--text-faint); }
+/* sub-steps: the doc's numbered steps folded into one row (4–6, 8–9, 12–13),
+   or the two or three distinct moves a single step is made of */
+/* minmax(0,…) on the single column for the same reason as .mstep: an auto
+   track takes its min-content width from the pre and blows out the row */
+.msub { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.msub__item { padding-left: 16px; border-left: 1px solid var(--border-inner); }
+.msub__label { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--accent-soft); margin-bottom: 6px; }
+.msub__body { font-size: var(--fs-xs); line-height: 1.55; color: var(--text-dim); }
+.msub__item .mstep__cmd, .msub__item .mstep__manual { margin-top: 10px; }
 .migrate__note { font-size: var(--fs-xs); line-height: 1.55; color: var(--text-faint); margin-top: 24px; max-width: 92ch; }
 /* stack the meta above the body once 190px + prose stops fitting */
 @media (max-width: 720px) {

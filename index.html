@@ -383,8 +383,8 @@ helm install cerberus \
       <p class="section__lead" style="max-width:62ch; margin-bottom:48px">
         <span class="mono-accent">cerberus migrate</span> works from your real queries — the rule files and dashboard JSON you
         already have — not from <span class="mono-dim">prometheus.yml</span>, because a config file can't tell you whether a
-        query translates cleanly. It is read-only: it never writes to Prometheus, Grafana® or ClickHouse®. Thirteen steps in
-        the guide — here is the path, and the command each step is.
+        query translates cleanly. Thirteen steps, each declaring what has to be true before it and what is true after — here
+        is the whole path, and the command each step is.
       </p>
 
       <ol class="migrate">
@@ -394,10 +394,26 @@ helm install cerberus \
             <h3 class="mstep__title">Prepare</h3>
           </div>
           <div>
-            <p class="mstep__body">Settle who adds the Collector's ClickHouse® exporter and when — that overlap is what step 10 can look back over. Then one <span class="mono-dim">cerberus.yaml</span>, same shape as the Helm chart's values, naming the ClickHouse® and query budget your deployed server will run with; <span class="mono-dim">schema</span>, <span class="mono-dim">classify</span> and <span class="mono-dim">explain</span> all read them. The password stays in <span class="mono-dim">CERBERUS_CH_PASSWORD</span>.</p>
-            <pre class="mstep__cmd"><code><span class="c-comment"># cerberus.yaml</span>
-clickhouse: { addr: [clickhouse.internal:9000], database: otel }
+            <p class="mstep__body">Two things have to be true before the first command is worth running: someone owns the ingestion change, and cerberus knows which ClickHouse® it is talking about.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">plan the dual ingestion path</div>
+                <p class="msub__body">Cerberus reads ClickHouse®; it does not fill it. Settle where ClickHouse® lives, who adds the Collector's exporter, and when — step 10 proves parity over the overlap, so every hour you delay is an hour you can't verify over later.</p>
+                <div class="mstep__manual">no command — a decision, and an owner</div>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">write cerberus.yaml</div>
+                <p class="msub__body">One file, written in the same shape as the Helm chart's values — so a setting has one name whether you deploy the chart or run the binary. Start with the engine and nothing else; steps 6, 7 and 10 each add only the keys they are about to use. Give it the values your <em>deployed</em> server will run with: <span class="mono-dim">schema</span>, <span class="mono-dim">classify</span> and <span class="mono-dim">explain</span> all read them.</p>
+                <pre class="mstep__cmd"><code><span class="c-comment"># cerberus.yaml</span>
+clickhouse: { addr: [clickhouse.internal:9000], database: otel, username: default }
 query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">keep the password out of the file</div>
+                <p class="msub__body">An exported env var overrides the file; a CLI flag overrides both — so the file is where settings live and the other two are for one-off overrides.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> export <span class="c-var">CERBERUS_CH_PASSWORD</span>=…</code></pre>
+              </li>
+            </ul>
           </div>
         </li>
 
@@ -407,9 +423,21 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Install</h3>
           </div>
           <div>
-            <p class="mstep__body">One binary on a laptop or jump host, not the cluster — it reads your files off local disk and writes its artifacts back beside them. Only stable releases publish a cask; release archives and the container image carry SLSA provenance.</p>
-            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> brew install --cask tsouza/tap/cerberus
+            <p class="mstep__body">One binary on a laptop or jump host, not the cluster — it reads your files off local disk and writes its artifacts back beside them. Your <span class="mono-dim">cerberus.yaml</span> belongs there too.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">homebrew</div>
+                <p class="msub__body">Only stable releases publish a cask, so <span class="mono-dim">brew</span> never hands you a prerelease.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> brew install --cask tsouza/tap/cerberus
 <span class="mstep__prompt">$</span> cerberus --version</code></pre>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">or an archive / the image</div>
+                <p class="msub__body">The same binary ships as a release archive — linux and darwin × amd64 and arm64, each with a SLSA provenance attestation — and inside the container image, whose entrypoint is cerberus itself. Every path you hand the container form has to be visible inside the mount.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> docker run --rm -v "<span class="c-var">$PWD</span>:/w" -w /w ghcr.io/tsouza/cerberus:&lt;tag&gt; \
+      migrate harvest --rules rules/ --out corpus.json</code></pre>
+              </li>
+            </ul>
           </div>
         </li>
 
@@ -419,7 +447,17 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Gather</h3>
           </div>
           <div>
-            <p class="mstep__body">Copy your Prometheus (and Loki) rule YAML across, and export the Grafana® dashboards to JSON — <span class="mono-dim">Share → Export → Save to file</span>. Harvesting from a live Grafana® API is not a shipped capability; export first.</p>
+            <p class="mstep__body">The corpus is built from your real queries, so they have to be readable on that machine first.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">rules</div>
+                <p class="msub__body">Copy your Prometheus recording and alerting rule YAML across. If you also run Loki, its rule YAML too.</p>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">dashboards</div>
+                <p class="msub__body">Export each one to JSON — <span class="mono-dim">Share → Export → Save to file</span>, or the Grafana® HTTP API. Harvesting from a live Grafana® API is not a shipped capability; export first.</p>
+              </li>
+            </ul>
             <div class="mstep__manual">no command — a directory of rule YAML, a directory of dashboard JSON</div>
           </div>
         </li>
@@ -430,8 +468,9 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Harvest</h3>
           </div>
           <div>
-            <p class="mstep__body">Every expression in your rule files and exported dashboard JSON, collected into one corpus.</p>
-            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate harvest --rules './rules/*.yml' --dashboards ./dashboards --out corpus.json</code></pre>
+            <p class="mstep__body">Every expression in those rule files and dashboards, collected into one corpus — the input every later step reads. Still offline.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate harvest --rules './rules/*.yml' --loki-rules './loki/*.yml' \
+      --dashboards ./dashboards --out corpus.json</code></pre>
           </div>
         </li>
 
@@ -441,8 +480,27 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Assess</h3>
           </div>
           <div>
-            <p class="mstep__body">How much translates cleanly, which recorded series your rules consume, and where cardinality will bite — <span class="mono-dim">classify</span>, <span class="mono-dim">rulegraph</span>, <span class="mono-dim">inventory</span>.</p>
-            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate classify --corpus corpus.json --json --out classify.json</code></pre>
+            <p class="mstep__body">Three reads of the same corpus, in any order: what translates, what your rules feed, and what will hurt at runtime.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">4 · classify — what translates</div>
+                <p class="msub__body">Every query bucketed <em>supported</em>, <em>unsupported</em> (naming the construct that failed) or supported-but-<em>risky</em>, bounded by the query budget from step 0. Read "supported" precisely: it translates — whether it returns the same numbers is what step 10 is for.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate classify --corpus corpus.json --json --out classify.json
+<span class="mstep__prompt">$</span> cerberus migrate explain  --corpus corpus.json   <span class="c-comment"># the SQL a query becomes</span></code></pre>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">5 · rulegraph — what feeds what</div>
+                <p class="msub__body">Links each recording rule's <span class="mono-dim">record:</span> output to the dashboards and alerts that read it. Cerberus has no ruler, so a <em>consumed</em> recorded series that stops being produced turns its panel quietly blank — this is the list that has to keep being materialized.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate rulegraph --rules './rules/*.yml' --corpus corpus.json \
+      --json --out rulegraph.json</code></pre>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">6 · inventory — what will hurt</div>
+                <p class="msub__body">Ranks top series and label cardinality off <span class="mono-dim">/api/v1/status/tsdb</span> — the first command that opens a socket. It ranks the OOM risk; it does not predict cerberus's memory use.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate inventory --source http://prometheus.internal:9090 \
+      --top 50 --json --out inventory.json</code></pre>
+              </li>
+            </ul>
           </div>
         </li>
 
@@ -452,8 +510,31 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Schema</h3>
           </div>
           <div>
-            <p class="mstep__body">Print the tables cerberus expects, review them, then apply them to ClickHouse®.</p>
-            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate schema | clickhouse-client -h clickhouse.internal --multiquery</code></pre>
+            <p class="mstep__body">Renders offline and byte-identical to what the server applies at startup, because it reads the same config — so it doubles as a cheap pre-deploy check: a typo anywhere in <span class="mono-dim">cerberus.yaml</span> aborts it with the error it would abort the server with. The pipe is what touches the database, and you run it deliberately.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate schema                       <span class="c-comment"># review it first</span>
+<span class="mstep__prompt">$</span> cerberus migrate schema | clickhouse-client -h clickhouse.internal --multiquery</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 8–9</div>
+            <h3 class="mstep__title">Stand it up</h3>
+          </div>
+          <div>
+            <p class="mstep__body">The two steps that are yours, not the tool's: start filling ClickHouse® in parallel, then put cerberus in front of it.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">8 · dual-write</div>
+                <p class="msub__body">Collector configuration, not a cerberus command — add the OTel ClickHouse® exporter pointed at the database from step 7 and <em>keep the existing Prometheus write path running</em>. Note the wall-clock time: step 10's <span class="mono-dim">--start</span> cannot reach back before it. You never cut over cold.</p>
+                <div class="mstep__manual">no command — one Collector exporter, both paths live</div>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">9 · deploy</div>
+                <p class="msub__body">Binary, image or Helm chart, with the same <span class="mono-dim">clickhouse</span> and <span class="mono-dim">schema</span> settings step 7 rendered from — otherwise it reads different tables than the ones you created. One endpoint serving all three APIs, with nothing pointed at it yet.</p>
+                <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> curl -sf http://cerberus.internal:8080/readyz</code></pre>
+              </li>
+            </ul>
           </div>
         </li>
 
@@ -463,9 +544,10 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Verify</h3>
           </div>
           <div>
-            <p class="mstep__body">Replay the whole corpus against both backends over the same window and diff every result — parity proven on your queries, not on a claim.</p>
+            <p class="mstep__body">The parity gate, and the only thing that earns you the flip: the whole corpus replayed against both backends over the same window, result diffed against result. Add <span class="mono-dim">--ref-loki</span> / <span class="mono-dim">--cerberus-loki</span> and the Tempo pair for the heads your corpus contains — a replayable query whose head has no backend pair blocks.</p>
             <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate verify --corpus corpus.json --ref <span class="c-var">$PROM</span> --cerberus <span class="c-var">$CERBERUS</span> \
-    --start -1h --end now --step 60s --json --out verify.json</code></pre>
+      --start -1h --end now --step 60s \
+      --json --out verify.json --report verify-diagnostics.json</code></pre>
           </div>
         </li>
 
@@ -475,29 +557,43 @@ query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
             <h3 class="mstep__title">Gate</h3>
           </div>
           <div>
-            <p class="mstep__body">All four reports folded into one go/no-go. Exit 0 means cleared — the gates refuse rather than warn, and a green result built on empty comparisons blocks too.</p>
+            <p class="mstep__body">A pure-offline aggregator: the JSON the earlier stages emitted folded into one PASS/FAIL verdict with a per-stage checklist. Exit 0 — and only exit 0 — clears you to cut over.</p>
             <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate gate --verify verify.json --classify classify.json \
-    --rulegraph rulegraph.json --inventory inventory.json</code></pre>
+      --rulegraph rulegraph.json --inventory inventory.json</code></pre>
+            <div class="mstep__manual">it refuses, it doesn't warn — verify blocks on any divergence <em>or</em> on a run that
+compared nothing · classify on any unsupported query · rulegraph on any
+consumed recorded series · inventory never blocks, it only warns</div>
           </div>
         </li>
 
         <li class="mstep">
           <div>
-            <div class="mstep__n">STEP 12</div>
+            <div class="mstep__n">STEP 12–13</div>
             <h3 class="mstep__title">Cut over</h3>
           </div>
           <div>
-            <p class="mstep__body">Repoint the Grafana® datasource URL — read-path panels first, paging alerts last. Dual-write keeps running until ClickHouse® retention covers your longest lookback.</p>
-            <div class="mstep__manual">no command — one datasource URL, and you're on cerberus</div>
+            <p class="mstep__body">One URL, then patience. Dashboards and alert rules are unchanged — that is the whole point.</p>
+            <ul class="msub">
+              <li class="msub__item">
+                <div class="msub__label">12 · flip</div>
+                <p class="msub__body">Point the Grafana® datasource URL at cerberus, or swap DNS in front of it. Read-path panels first; leave anything that <em>pages</em> for last, once you've watched the read path stay green. Keep dual-write running — Prometheus is still your rollback.</p>
+                <div class="mstep__manual">no command — one datasource URL, and you're on cerberus</div>
+              </li>
+              <li class="msub__item">
+                <div class="msub__label">13 · decommission</div>
+                <p class="msub__body">Stop the Prometheus write and storage path, once ClickHouse® retention covers the longest window your dashboards and alerts look back over. That runway is the rollback; there is no prize for doing it early.</p>
+              </li>
+            </ul>
           </div>
         </li>
       </ol>
 
       <p class="migrate__note">
-        Steps 8–9 — making that Collector change alongside your existing write path, and standing cerberus up against
-        ClickHouse® — are yours to run by hand; <span class="mono-dim">migrate</span> only reads. And cerberus has no ruler:
-        it answers the PromQL Grafana® sends it, but whatever evaluates your recording and alerting rules today has to keep
-        doing so — step 5 names exactly which ones matter.
+        Steps 7, 8, 9, 12 and 13 are the only ones that change anything, and you run all five by hand — everything else is
+        <span class="mono-dim">migrate</span>, and <span class="mono-dim">migrate</span> only reads. Two constraints hold the
+        whole way through: cerberus does not ingest, so your OpenTelemetry Collector keeps filling ClickHouse®, and it has no
+        ruler — it answers the PromQL Grafana® sends it, but whatever evaluates your recording and alerting rules today has to
+        keep doing so. Step 5 names exactly which ones matter.
       </p>
 
       <div class="doclinks">
