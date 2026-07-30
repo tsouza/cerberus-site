@@ -59,6 +59,7 @@
         <a class="nav__link" href="#architecture">Architecture</a>
         <a class="nav__link" href="#features">Engine</a>
         <a class="nav__link" href="#start">Quick start</a>
+        <a class="nav__link" href="#migration">Migration</a>
         <a class="nav__link" href="#correctness">Correctness</a>
         <a class="btn btn--github" href="https://github.com/tsouza/cerberus" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -375,12 +376,106 @@ helm install cerberus \
       </div>
     </section>
 
+    <!-- ======================= MIGRATION ======================= -->
+    <section id="migration" class="section section--pad container" data-screen-label="Migration">
+      <span class="section__eyebrow">06 — MIGRATION</span>
+      <h2 class="section__title" style="max-width:22ch">Prove the swap before you make it</h2>
+      <p class="section__lead" style="max-width:62ch; margin-bottom:48px">
+        <span class="mono-accent">cerberus migrate</span> works from your real queries — the rule files and dashboard JSON you
+        already have — not from <span class="mono-dim">prometheus.yml</span>, because a config file can't tell you whether a
+        query translates cleanly. It is read-only: it never writes to Prometheus, Grafana® or ClickHouse®. Thirteen steps in
+        the guide; these six are the spine.
+      </p>
+
+      <ol class="migrate">
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 3</div>
+            <h3 class="mstep__title">Harvest</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Every expression in your rule files and exported dashboard JSON, collected into one corpus.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate harvest --rules './rules/*.yml' --dashboards ./dashboards --out corpus.json</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 4–6</div>
+            <h3 class="mstep__title">Assess</h3>
+          </div>
+          <div>
+            <p class="mstep__body">How much translates cleanly, which recorded series your rules consume, and where cardinality will bite — <span class="mono-dim">classify</span>, <span class="mono-dim">rulegraph</span>, <span class="mono-dim">inventory</span>.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate classify --corpus corpus.json --json --out classify.json</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 7</div>
+            <h3 class="mstep__title">Schema</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Print the tables cerberus expects, review them, then apply them to ClickHouse®.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate schema | clickhouse-client -h clickhouse.internal --multiquery</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 10</div>
+            <h3 class="mstep__title">Verify</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Replay the whole corpus against both backends over the same window and diff every result — parity proven on your queries, not on a claim.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate verify --corpus corpus.json --ref <span class="c-var">$PROM</span> --cerberus <span class="c-var">$CERBERUS</span> \
+    --start -1h --end now --step 60s --json --out verify.json</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 11</div>
+            <h3 class="mstep__title">Gate</h3>
+          </div>
+          <div>
+            <p class="mstep__body">All four reports folded into one go/no-go. Exit 0 means cleared — the gates refuse rather than warn, and a green result built on empty comparisons blocks too.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> cerberus migrate gate --verify verify.json --classify classify.json \
+    --rulegraph rulegraph.json --inventory inventory.json</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 12</div>
+            <h3 class="mstep__title">Cut over</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Repoint the Grafana® datasource URL — read-path panels first, paging alerts last. Dual-write keeps running until ClickHouse® retention covers your longest lookback.</p>
+            <div class="mstep__manual">no command — one datasource URL, and you're on cerberus</div>
+          </div>
+        </li>
+      </ol>
+
+      <p class="migrate__note">
+        Steps 8–9 — adding the Collector's ClickHouse® exporter alongside your existing write path, and standing cerberus up —
+        are yours to make by hand; <span class="mono-dim">migrate</span> only reads. Two things to plan for: cerberus does not
+        ingest, so your OpenTelemetry Collector keeps filling ClickHouse®, and it has no ruler, so whatever evaluates your
+        recording and alerting rules today has to keep doing so — step 5 names exactly which ones matter.
+      </p>
+
+      <div class="doclinks">
+        <a class="doclink" href="https://github.com/tsouza/cerberus/blob/main/docs/migration.md" target="_blank" rel="noopener">Migration guide →</a>
+        <a class="doclink" href="https://github.com/tsouza/cerberus/blob/main/docs/migration-reference.md" target="_blank" rel="noopener">Every flag &amp; exit code →</a>
+      </div>
+    </section>
+
     <!-- ======================= CORRECTNESS ======================= -->
     <section id="correctness" class="section section--band-top" data-screen-label="Correctness">
       <div class="container" style="padding-block:96px">
         <div class="section__intro" style="margin-bottom:40px">
           <div class="section__intro-copy">
-            <span class="section__eyebrow">06 — CORRECTNESS</span>
+            <span class="section__eyebrow">07 — CORRECTNESS</span>
             <h2 class="section__title" style="max-width:24ch">Held to reference, case for case</h2>
             <p class="section__lead" style="max-width:62ch">
               Every head is diffed against its real upstream engine on shared, seeded data — pinning observed semantics on
