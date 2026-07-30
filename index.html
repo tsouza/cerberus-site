@@ -384,10 +384,46 @@ helm install cerberus \
         <span class="mono-accent">cerberus migrate</span> works from your real queries — the rule files and dashboard JSON you
         already have — not from <span class="mono-dim">prometheus.yml</span>, because a config file can't tell you whether a
         query translates cleanly. It is read-only: it never writes to Prometheus, Grafana® or ClickHouse®. Thirteen steps in
-        the guide; these six are the spine.
+        the guide — here is the path, and the command each step is.
       </p>
 
       <ol class="migrate">
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 0</div>
+            <h3 class="mstep__title">Prepare</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Settle who adds the Collector's ClickHouse® exporter and when — that overlap is what step 10 can look back over. Then one <span class="mono-dim">cerberus.yaml</span>, same shape as the Helm chart's values, naming the ClickHouse® and query budget your deployed server will run with; <span class="mono-dim">schema</span>, <span class="mono-dim">classify</span> and <span class="mono-dim">explain</span> all read them. The password stays in <span class="mono-dim">CERBERUS_CH_PASSWORD</span>.</p>
+            <pre class="mstep__cmd"><code><span class="c-comment"># cerberus.yaml</span>
+clickhouse: { addr: [clickhouse.internal:9000], database: otel }
+query:      { maxSamples: 5000000, timeout: 2m }</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 1</div>
+            <h3 class="mstep__title">Install</h3>
+          </div>
+          <div>
+            <p class="mstep__body">One binary on a laptop or jump host, not the cluster — it reads your files off local disk and writes its artifacts back beside them. Only stable releases publish a cask; release archives and the container image carry SLSA provenance.</p>
+            <pre class="mstep__cmd"><code><span class="mstep__prompt">$</span> brew install --cask tsouza/tap/cerberus
+<span class="mstep__prompt">$</span> cerberus --version</code></pre>
+          </div>
+        </li>
+
+        <li class="mstep">
+          <div>
+            <div class="mstep__n">STEP 2</div>
+            <h3 class="mstep__title">Gather</h3>
+          </div>
+          <div>
+            <p class="mstep__body">Copy your Prometheus (and Loki) rule YAML across, and export the Grafana® dashboards to JSON — <span class="mono-dim">Share → Export → Save to file</span>. Harvesting from a live Grafana® API is not a shipped capability; export first.</p>
+            <div class="mstep__manual">no command — a directory of rule YAML, a directory of dashboard JSON</div>
+          </div>
+        </li>
+
         <li class="mstep">
           <div>
             <div class="mstep__n">STEP 3</div>
@@ -458,10 +494,10 @@ helm install cerberus \
       </ol>
 
       <p class="migrate__note">
-        Steps 8–9 — adding the Collector's ClickHouse® exporter alongside your existing write path, and standing cerberus up —
-        are yours to make by hand; <span class="mono-dim">migrate</span> only reads. Two things to plan for: cerberus does not
-        ingest, so your OpenTelemetry Collector keeps filling ClickHouse®, and it has no ruler, so whatever evaluates your
-        recording and alerting rules today has to keep doing so — step 5 names exactly which ones matter.
+        Steps 8–9 — making that Collector change alongside your existing write path, and standing cerberus up against
+        ClickHouse® — are yours to run by hand; <span class="mono-dim">migrate</span> only reads. And cerberus has no ruler:
+        it answers the PromQL Grafana® sends it, but whatever evaluates your recording and alerting rules today has to keep
+        doing so — step 5 names exactly which ones matter.
       </p>
 
       <div class="doclinks">
